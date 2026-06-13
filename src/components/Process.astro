@@ -1,0 +1,24 @@
+---
+import { process } from "../data/site.js";
+---
+
+<section id="process" class="sec-pad">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">How we refurbish</div>
+      <h2>Every unit earns its place in stock.</h2>
+      <p class="sec-desc">Refurbished doesn't mean uncertain. Each system passes a structured process before it ships — so you get reliability, not surprises.</p>
+    </div>
+    <div class="proc-grid reveal">
+      {process.map((p, i) => (
+        <div class="proc">
+          <div class="proc-step">{String(i + 1).padStart(2, "0")}</div>
+          <div class="proc-ico"><i class={`ti ti-${p.icon}`}></i></div>
+          <h4>{p.title}</h4>
+          <p>{p.desc}</p>
+          {i < process.length - 1 && <i class="ti ti-chevron-right proc-arrow"></i>}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

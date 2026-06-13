@@ -1,0 +1,50 @@
+---
+// Our partners / clients — an auto-scrolling logo wall.
+// Tiles show a monogram placeholder until you add real logos in src/data/site.js
+// (set each partner's `logo` to an image path under /public).
+import { partners } from "../data/site.js";
+
+// Split into two rows for the opposite-direction marquee. Each row is doubled
+// in the markup so the -50% scroll keyframe loops seamlessly.
+const half = Math.ceil(partners.length / 2);
+const rowA = partners.slice(0, half);
+const rowB = partners.slice(half);
+---
+
+<section id="partners" class="sec-pad partners-sec">
+  <div class="partners-glow"></div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Our partners &amp; clients</div>
+      <h2>Trusted by teams across India.</h2>
+      <p class="sec-desc">From startups and studios to schools and large corporate offices, organisations nationwide rely on MicroApts to supply, deploy and maintain their IT hardware.</p>
+    </div>
+  </div>
+
+  <div class="partner-rows reveal">
+    <div class="prow" data-row>
+      {[...rowA, ...rowA].map((p) => (
+        <div class="plogo" title={p.name}>
+          {p.logo
+            ? <img src={p.logo} alt={p.name} loading="lazy" />
+            : <span class="plogo-mark">{p.initials}</span>}
+          <span class="plogo-name">{p.name}</span>
+        </div>
+      ))}
+    </div>
+    <div class="prow prow-rev" data-row>
+      {[...rowB, ...rowB].map((p) => (
+        <div class="plogo" title={p.name}>
+          {p.logo
+            ? <img src={p.logo} alt={p.name} loading="lazy" />
+            : <span class="plogo-mark">{p.initials}</span>}
+          <span class="plogo-name">{p.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p class="partners-note">Proud to support <strong>{partners.length}+</strong> businesses, institutions and startups — and counting.</p>
+  </div>
+</section>

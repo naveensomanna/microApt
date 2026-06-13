@@ -1,0 +1,22 @@
+---
+import { coreServices } from "../data/site.js";
+---
+
+<section id="services" class="sec-pad">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">What we do</div>
+      <h2>One partner for the full hardware lifecycle.</h2>
+      <p class="sec-desc">From procurement to deployment to ongoing maintenance — we cover every stage so your team can focus on the work, not the infrastructure.</p>
+    </div>
+    <div class="svc-grid reveal">
+      {coreServices.map((s) => (
+        <div class="svc">
+          <div class="svc-ico"><i class={`ti ti-${s.icon}`}></i></div>
+          <h3>{s.title}</h3>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

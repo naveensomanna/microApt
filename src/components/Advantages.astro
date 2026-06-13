@@ -1,0 +1,21 @@
+---
+import { advantages } from "../data/site.js";
+---
+
+<section class="adv-sec sec-pad">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">The MicroApts advantage</div>
+      <h2>Why corporate teams choose us.</h2>
+    </div>
+    <div class="adv-grid reveal">
+      {advantages.map((a) => (
+        <div class="adv">
+          <div class="adv-n">{a.no}</div>
+          <h4>{a.title}</h4>
+          <p>{a.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

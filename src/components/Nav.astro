@@ -1,0 +1,78 @@
+---
+// Sticky top nav + global scroll behaviours (active-section spy, reveal-on-scroll).
+import { navSections } from "../data/site.js";
+---
+
+<nav id="nav">
+  <div class="wrap nav-inner">
+    <a href="/" class="logo"><span class="logo-mark"><i class="ti ti-power"></i></span>MicroApts</a>
+    <div class="nav-links">
+      {navSections.map((s) => <a href={`#${s.id}`} data-nav={s.id}>{s.label}</a>)}
+    </div>
+    <button class="nav-cta" data-quote>Get a quote</button>
+  </div>
+</nav>
+
+<script>
+  /* Sticky nav border on scroll */
+  const nav = document.getElementById("nav");
+  addEventListener("scroll", () => nav?.classList.toggle("scrolled", scrollY > 20));
+
+  /* Active-section highlight */
+  const navLinks = document.querySelectorAll("[data-nav]");
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        navLinks.forEach((l) =>
+          l.classList.toggle("active", (l as HTMLElement).dataset.nav === e.target.id)
+        );
+      }
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  ["services", "products", "process", "partners", "contact"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) spy.observe(el);
+  });
+
+  /* Reveal-on-scroll for any .reveal element across the page.
+     Belt-and-suspenders so a section can NEVER get stuck invisible (the bug
+     where the partners section appeared "missing"):
+       1. IntersectionObserver — reliably reveals in-view elements, including
+          when a visitor lands directly on an anchor like #partners.
+       2. A scroll/resize/rAF fallback in case an observer callback is missed
+          on very fast scrolling.
+       3. A final safety timer that force-reveals anything still hidden. */
+  const reveal = (el) => el.classList.add("in");
+  const els = Array.from(document.querySelectorAll(".reveal"));
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((e) => { if (e.isIntersecting) { reveal(e.target); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach(reveal);
+  }
+
+  const revealInView = () => {
+    els.forEach((el) => {
+      if (el.classList.contains("in")) return;
+      const r = el.getBoundingClientRect();
+      if (r.top < innerHeight * 0.92 && r.bottom > 0) reveal(el);
+    });
+  };
+  revealInView();
+  addEventListener("scroll", revealInView, { passive: true });
+  addEventListener("resize", revealInView);
+  addEventListener("load", () => {
+    revealInView();
+    let n = 0;
+    const tick = () => { revealInView(); if (++n < 20) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+    // Last resort: never leave content permanently hidden.
+    setTimeout(() => els.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < innerHeight) reveal(el);
+    }), 1800);
+  });
+</script>

@@ -1,0 +1,16 @@
+---
+// Infinite marquee of industries served.
+import { industries, industryIcons } from "../data/site.js";
+---
+
+<section class="ind-section">
+  <div class="ind-strip"><div class="ind-track" id="indtrack"></div></div>
+</section>
+
+<script define:vars={{ industries, industryIcons }}>
+  const track = document.getElementById("indtrack");
+  // Duplicate the list so the -50% scroll keyframe loops seamlessly.
+  track.innerHTML = [...industries, ...industries]
+    .map((t) => `<div class="ind-item"><i class="ti ti-${industryIcons[t] || "point"}"></i>${t}</div>`)
+    .join("");
+</script>

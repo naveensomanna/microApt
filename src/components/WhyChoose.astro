@@ -1,0 +1,18 @@
+---
+import { whyChoose } from "../data/site.js";
+---
+
+<section id="why" class="sec-pad why-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Why choose MicroApts</div>
+      <h2>Every box ticked, before it ships.</h2>
+      <p class="sec-desc">The assurances corporate buyers actually care about — built into every order, rental and contract.</p>
+    </div>
+    <div class="why-grid reveal">
+      {whyChoose.map((item) => (
+        <div class="why-item"><i class="ti ti-circle-check"></i><span>{item}</span></div>
+      ))}
+    </div>
+  </div>
+</section>

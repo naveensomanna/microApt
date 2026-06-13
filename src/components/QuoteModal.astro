@@ -1,0 +1,94 @@
+---
+// Low-friction quote modal. Opens from any [data-quote] button and hands off
+// a prefilled WhatsApp message — no backend required.
+import { CONTACT } from "../data/site.js";
+---
+
+<div class="modal-overlay" id="quoteModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="qTitle">
+    <button class="modal-close" data-close aria-label="Close">&times;</button>
+    <div class="modal-body" id="modalBody">
+      <div class="sec-tag">Quick quote</div>
+      <h3 id="qTitle">Tell us what you need</h3>
+      <p class="modal-sub">A few details and we'll get back within hours. No obligation.</p>
+
+      <div class="field">
+        <label>What are you looking for?</label>
+        <div class="chip-row" id="needChips">
+          {["Laptops","Desktops","Workstations","Servers","Networking","Other"].map((n) => (
+            <button class="chip" data-need={n}>{n}</button>
+          ))}
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="qQty">Quantity</label>
+          <input id="qQty" type="number" min="1" placeholder="e.g. 25" />
+        </div>
+        <div class="field">
+          <label>Buy or rent?</label>
+          <div class="seg" id="modeSeg">
+            <button class="seg-btn active" data-mode="Buy">Buy</button>
+            <button class="seg-btn" data-mode="Rent">Rent</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field"><label for="qName">Name</label><input id="qName" type="text" placeholder="Your name" /></div>
+        <div class="field"><label for="qContact">Phone or email</label><input id="qContact" type="text" placeholder="How we reach you" /></div>
+      </div>
+
+      <button class="btn-wa full" id="qWhatsApp"><i class="ti ti-brand-whatsapp"></i> Send on WhatsApp</button>
+      <p class="modal-foot">Or call <a href={`tel:${CONTACT.phone1.replace(/\s/g, "")}`}>{CONTACT.phone1}</a> · GST invoice &amp; warranty on every order</p>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ CONTACT }}>
+  const modal = document.getElementById("quoteModal");
+  const modalBody = document.getElementById("modalBody");
+  let selectedNeed = "", selectedMode = "Buy";
+
+  function openModal() { modal.classList.add("open"); modal.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; }
+  function closeModal() { modal.classList.remove("open"); modal.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; }
+  document.querySelectorAll("[data-quote]").forEach((b) => b.addEventListener("click", openModal));
+  document.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", closeModal));
+  modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+  addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+  document.querySelectorAll("[data-need]").forEach((c) => c.addEventListener("click", () => {
+    document.querySelectorAll("[data-need]").forEach((x) => x.classList.remove("active"));
+    c.classList.add("active"); selectedNeed = c.dataset.need;
+  }));
+  document.querySelectorAll("[data-mode]").forEach((m) => m.addEventListener("click", () => {
+    document.querySelectorAll("[data-mode]").forEach((x) => x.classList.remove("active"));
+    m.classList.add("active"); selectedMode = m.dataset.mode;
+  }));
+
+  function getFormValues() {
+    return {
+      qty: document.getElementById("qQty").value || "",
+      name: document.getElementById("qName").value || "",
+      contact: document.getElementById("qContact").value || "",
+    };
+  }
+  function successView(title, msg) {
+    modalBody.innerHTML = `<div class="modal-success"><div class="ms-ico"><i class="ti ti-brand-whatsapp"></i></div>
+      <h3>${title}</h3><p>${msg}</p><button class="btn-ghost" data-close>Close</button></div>`;
+    modalBody.querySelector("[data-close]").addEventListener("click", closeModal);
+  }
+
+  /* WhatsApp: opens a prefilled chat to your number (no backend). */
+  document.getElementById("qWhatsApp").addEventListener("click", () => {
+    const { qty, name, contact } = getFormValues();
+    const text = encodeURIComponent(
+      `Hi MicroApts, I'd like a quote.\n\n` +
+      `Item: ${selectedNeed || "IT hardware"}\nQuantity: ${qty || "—"}\nBuy or rent: ${selectedMode}\n` +
+      `Name: ${name || "—"}\nContact: ${contact || "—"}`
+    );
+    window.open(`https://wa.me/${CONTACT.whatsapp}?text=${text}`, "_blank");
+    successView("Opening WhatsApp…", `Your quote message is ready — just press send. If WhatsApp didn't open, call us at <a href="tel:${CONTACT.phone1.replace(/\s/g, "")}">${CONTACT.phone1}</a>.`);
+  });
+</script>

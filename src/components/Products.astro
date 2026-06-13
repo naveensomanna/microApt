@@ -1,0 +1,49 @@
+---
+// Product catalog with the interactive category switcher.
+import { productCategories } from "../data/site.js";
+---
+
+<section id="products" class="prod-sec sec-pad">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Product catalog</div>
+      <h2>Everything your infrastructure runs on.</h2>
+      <p class="sec-desc">Refurbished and brand-new, fully tested, ready to deploy. Select a category to browse the range.</p>
+    </div>
+    <div class="prod-layout reveal">
+      <div class="prod-cats" role="tablist">
+        {productCategories.map((p, i) => (
+          <button class={`pcat${i === 0 ? " active" : ""}`} data-idx={i} role="tab" aria-selected={i === 0 ? "true" : "false"}>
+            <i class={`ti ti-${p.icon} pcat-ico`}></i>
+            <span class="pcat-t">{p.key}</span>
+            <span class="pcat-c">{p.items.length} types</span>
+          </button>
+        ))}
+      </div>
+      <div class="prod-panel" id="ppanel"></div>
+    </div>
+    <div class="mini-cta reveal">
+      <span>Need a specific configuration or bulk quantity?</span>
+      <button class="btn-primary sm" data-quote>Get a quote <i class="ti ti-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ productCategories }}>
+  const ppanel = document.getElementById("ppanel");
+  function renderPanel(p) {
+    ppanel.innerHTML = `
+      <div class="pp-head"><i class="ti ti-${p.icon} pp-icon"></i><div class="pp-title">${p.key}</div></div>
+      <p class="pp-desc">${p.desc}</p>
+      <div class="pp-items">${p.items.map((i) => `<div class="pp-item"><i class="ti ti-point-filled"></i>${i}</div>`).join("")}</div>
+      <div class="pp-tags">${p.tags.map((t) => `<span class="ptag">${t}</span>`).join("")}</div>`;
+  }
+  renderPanel(productCategories[0]);
+  document.querySelectorAll(".pcat").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".pcat").forEach((x) => { x.classList.remove("active"); x.setAttribute("aria-selected", "false"); });
+      btn.classList.add("active"); btn.setAttribute("aria-selected", "true");
+      renderPanel(productCategories[Number(btn.dataset.idx)]);
+    });
+  });
+</script>
