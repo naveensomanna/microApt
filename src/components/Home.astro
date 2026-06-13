@@ -1,0 +1,457 @@
+---
+// src/pages/index.astro
+// MicroApts Technologies — Homepage
+
+const coreServices = [
+  { no: "01", icon: "cart", title: "Sale", desc: "Brand-new systems from Dell, HP, Lenovo and Apple, plus certified-refurbished, professionally tested units." },
+  { no: "02", icon: "calendar", title: "Rentals", desc: "Short and long-term enterprise rental solutions for projects, events and scaling teams." },
+  { no: "03", icon: "tool", title: "Service", desc: "Experienced onsite and on-premises engineers, with remote and phone-call support." },
+  { no: "04", icon: "shield", title: "AMC", desc: "Annual maintenance contracts that prevent downtime and keep your fleet running predictably." },
+];
+
+const productCategories = [
+  {
+    key: "IT systems",
+    icon: "laptop",
+    desc: "Refurbished & brand-new, fully tested and deployment-ready.",
+    items: ["Laptops", "Desktops", "Workstations", "Servers", "Monitors"],
+    tags: ["Dell", "HP", "Lenovo", "Apple"],
+  },
+  {
+    key: "Components & storage",
+    icon: "cpu",
+    desc: "Storage and memory upgrades for every grade of system.",
+    items: ["RAM (DDR4 / DDR5 — ECC & Non-ECC)", "SSD — SATA", "NVMe SSD", "Hard disk drives (HDD)", "Graphics cards"],
+    tags: ["ECC & Non-ECC", "Workstation grade", "Server grade"],
+  },
+  {
+    key: "Networking",
+    icon: "network",
+    desc: "New and used switching, wireless and security hardware.",
+    items: ["Layer 2 & Layer 3 switches", "Managed / unmanaged (1–10Gbps)", "Wireless access points", "Routers & security devices", "Structured accessories"],
+    tags: ["1Gbps–10Gbps", "Enterprise WiFi"],
+  },
+  {
+    key: "Spares & accessories",
+    icon: "tools",
+    desc: "Compatible spares and accessories to keep fleets running.",
+    items: ["Compatible batteries", "Displays / screens", "ABCD panels", "Keyboards & chargers", "Internal cables & spares"],
+    tags: ["Compatible", "In stock"],
+  },
+];
+
+const advantages = [
+  { no: "01", title: "Pan-India supply", desc: "Capability across multiple cities and states with logistics built for scale." },
+  { no: "02", title: "Proven track record", desc: "5+ years of operations backed by 15+ years of hands-on industry experience." },
+  { no: "03", title: "B2B specialists", desc: "Deep focus on corporate and enterprise procurement, not consumer retail." },
+  { no: "04", title: "Quality assurance", desc: "Structured testing and recertification on every refurbished unit we ship." },
+  { no: "05", title: "Engineer-backed", desc: "Skilled onsite and on-premises engineering team for service and AMC." },
+  { no: "06", title: "Warranty & replacement", desc: "Warranty-backed solutions with flexible replacement models and after-sales support." },
+];
+
+const whyChoose = [
+  "GST invoice provided for every purchase",
+  "Warranty on every laptop",
+  "Professionally tested & quality checked",
+  "SSD health & performance verified",
+  "Corporate & bulk order support",
+  "PAN India delivery",
+  "Laptop sales & rental solutions",
+  "Skilled on-site & remote technical support",
+  "Chip-level repair expertise",
+  "Custom configuration (RAM / SSD upgrades)",
+  "Buyback & upgrade options",
+  "Engineers with 10+ years of expertise",
+];
+
+const industries = [
+  "IT & Software", "Engineering & Construction", "Manufacturing", "Design & Studio",
+  "Startups & MSMEs", "Education", "Corporate Offices",
+];
+
+const stats = [
+  { num: "5+", label: "Years as a registered company" },
+  { num: "15+", label: "Years of industry leadership" },
+  { num: "Pan·IN", label: "Supply & onsite support" },
+  { num: "4×", label: "Sale · Rent · Service · AMC" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MicroApts Technologies — Enterprise IT Hardware | Sale, Rentals, Service & AMC</title>
+  <meta name="description" content="B2B supplier of enterprise-grade IT hardware across India — brand-new and certified-refurbished laptops, desktops, workstations, servers and networking, with rentals, service and AMC." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="wrap nav-inner">
+      <a href="/" class="logo"><span class="logo-mark"><i class="ti ti-power"></i></span>MicroApts</a>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#products">Products</a>
+        <a href="#why">Why us</a>
+        <a href="#industries">Industries</a>
+      </div>
+      <a href="#contact" class="nav-cta">Get a quote</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="grid-bg"></div>
+    <div class="wrap hero-inner">
+      <div class="reveal">
+        <div class="eyebrow"><span class="pulse"></span>Sale · Rentals · Service · AMC</div>
+        <h1>Enterprise IT,<br />built to <span class="accent">keep you running.</span></h1>
+        <p class="hero-sub">Brand-new and certified-refurbished hardware, flexible rentals, and engineer-backed AMC support — supplied across India for teams that need performance on a budget.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Request a quote <i class="ti ti-arrow-right"></i></a>
+          <a href="#products" class="btn-ghost">Explore catalog</a>
+        </div>
+      </div>
+      <div class="panel reveal">
+        <div class="p-head"><span class="p-led"></span>SYSTEMS · OPERATIONAL</div>
+        <div class="p-big">99.9<span>%</span></div>
+        <div class="p-lbl">Fleet uptime under active AMC</div>
+        <div class="p-rows">
+          <div><div class="p-row"><span>Onsite response</span><b>&lt; 72 hrs</b></div><div class="p-bar"><i style="width:88%"></i></div></div>
+          <div><div class="p-row"><span>Quality-tested units</span><b>100%</b></div><div class="p-bar"><i style="width:100%"></i></div></div>
+          <div><div class="p-row"><span>Pan-India coverage</span><b>active</b></div><div class="p-bar"><i style="width:94%"></i></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="statbar reveal">
+        {stats.map((s) => (
+          <div class="stat">
+            <div class="stat-num" set:html={s.num.replace(/([+×·]|IN)/g, '<span>$1</span>')}></div>
+            <div class="stat-lbl">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </header>
+
+  <section id="services" class="sec-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">What we do</div>
+        <h2>One partner for the full hardware lifecycle.</h2>
+        <p class="sec-desc">From procurement to deployment to ongoing maintenance — we cover every stage so your team can focus on the work, not the infrastructure.</p>
+      </div>
+      <div class="svc-grid reveal">
+        {coreServices.map((s) => (
+          <div class="svc">
+            <span class="svc-no">{s.no}</span>
+            <div class="svc-ico"><i class={`ti ti-${s.icon === 'cart' ? 'shopping-cart' : s.icon === 'calendar' ? 'calendar-stats' : s.icon === 'shield' ? 'shield-check' : 'tool'}`}></i></div>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="prod-sec sec-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Product catalog</div>
+        <h2>Everything your infrastructure runs on.</h2>
+        <p class="sec-desc">Refurbished and brand-new, fully tested, ready to deploy. Select a category to browse the range.</p>
+      </div>
+      <div class="prod-layout reveal">
+        <div class="prod-cats">
+          {productCategories.map((p, i) => (
+            <button class={`pcat${i === 0 ? ' active' : ''}`} data-idx={i}>
+              <i class={`ti ti-${p.icon === 'laptop' ? 'device-laptop' : p.icon} pcat-ico`}></i>
+              <span class="pcat-t">{p.key}</span>
+              <span class="pcat-c">{p.items.length} types</span>
+            </button>
+          ))}
+        </div>
+        <div class="prod-panel" id="ppanel"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why" class="sec-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">Why choose MicroApts</div>
+        <h2>Every box ticked, before it ships.</h2>
+        <p class="sec-desc">The assurances corporate buyers actually care about — built into every order, rental and contract.</p>
+      </div>
+      <div class="why-grid reveal">
+        {whyChoose.map((item) => (
+          <div class="why-item"><i class="ti ti-circle-check"></i><span>{item}</span></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="adv-sec sec-pad">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="sec-tag">The MicroApts advantage</div>
+        <h2>Why corporate teams choose us.</h2>
+      </div>
+      <div class="adv-grid reveal">
+        {advantages.map((a) => (
+          <div class="adv">
+            <div class="adv-n">{a.no}</div>
+            <h4>{a.title}</h4>
+            <p>{a.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="industries">
+    <div class="ind-strip"><div class="ind-track" id="indtrack"></div></div>
+  </section>
+
+  <section class="sec-pad" id="contact">
+    <div class="wrap">
+      <div class="cta reveal">
+        <div class="grid-c"></div>
+        <div class="cta-inner">
+          <div class="sec-tag cta-tag">Let's talk hardware</div>
+          <h2>Tell us what you need.<br />We'll quote it within hours.</h2>
+          <p>Whether it's 5 laptops or a 200-seat rollout, our team builds the right configuration for your budget and timeline.</p>
+          <div class="cta-actions">
+            <a href="mailto:sales@microaptech.com" class="btn-light">Request a quote</a>
+            <a href="https://www.microaptech.com" class="btn-outline">Visit website</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-col">
+          <a href="/" class="logo"><span class="logo-mark"><i class="ti ti-power"></i></span>MicroApts Technologies</a>
+          <p class="foot-about">B2B-focused supplier of enterprise-grade IT hardware — sale, rentals, service and AMC, across India.</p>
+        </div>
+        <div class="foot-col"><h5>Products</h5><a href="#products">Laptops &amp; desktops</a><a href="#products">Workstations</a><a href="#products">Servers</a><a href="#products">Networking</a></div>
+        <div class="foot-col"><h5>Services</h5><a href="#services">Rentals</a><a href="#services">AMC contracts</a><a href="#services">Onsite support</a><a href="#services">Refurbished</a></div>
+        <div class="foot-col"><h5>Company</h5><a href="#why">About</a><a href="#industries">Industries</a><a href="mailto:sales@microaptech.com">Contact</a><a href="https://www.microaptech.com">microaptech.com</a></div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 MicroApts Technologies Pvt Ltd · Private Limited Company</span>
+        <span class="mono">IT Hardware · Sales · Rentals · Service</span>
+      </div>
+    </div>
+  </footer>
+
+  <script define:vars={{ productCategories, industries }}>
+    // Product category switcher
+    const ppanel = document.getElementById("ppanel");
+    function renderPanel(p) {
+      ppanel.innerHTML = `
+        <div class="pp-head"><i class="ti ti-${p.icon === 'laptop' ? 'device-laptop' : p.icon} pp-icon"></i><div class="pp-title">${p.key}</div></div>
+        <p class="pp-desc">${p.desc}</p>
+        <div class="pp-items">${p.items.map((i) => `<div class="pp-item"><i class="ti ti-point-filled"></i>${i}</div>`).join("")}</div>
+        <div class="pp-tags">${p.tags.map((t) => `<span class="ptag">${t}</span>`).join("")}</div>`;
+    }
+    renderPanel(productCategories[0]);
+    document.querySelectorAll(".pcat").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".pcat").forEach((x) => x.classList.remove("active"));
+        btn.classList.add("active");
+        renderPanel(productCategories[Number(btn.dataset.idx)]);
+      });
+    });
+
+    // Industries marquee
+    const iconMap = {
+      "IT & Software": "code", "Engineering & Construction": "ruler-2", "Manufacturing": "building-factory",
+      "Design & Studio": "palette", "Startups & MSMEs": "rocket", "Education": "school", "Corporate Offices": "building-skyscraper",
+    };
+    const track = document.getElementById("indtrack");
+    const seq = [...industries, ...industries]
+      .map((t) => `<div class="ind-item"><i class="ti ti-${iconMap[t] || "point"}"></i>${t}</div>`).join("");
+    track.innerHTML = seq;
+
+    // Nav border on scroll
+    const nav = document.getElementById("nav");
+    addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 20));
+
+    // Reveal on scroll
+    const io = new IntersectionObserver(
+      (es) => es.forEach((e) => { if (e.isIntersecting) e.target.classList.add("in"); }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".reveal").forEach((e) => io.observe(e));
+  </script>
+
+  <style is:global>
+    :root{
+      --bg:#FFFFFF; --bg-2:#F4F7FC; --bg-3:#EAF0FA;
+      --ink:#0B1B33; --ink-2:#43536B; --ink-3:#8593A8;
+      --line:#DCE5F2; --line-2:#C4D2E8;
+      --blue:#1763D6; --blue-deep:#0E47A1; --blue-bright:#2E86FF; --blue-ink:#0A2A5E; --sky:#E6F0FF;
+      --card:#FFFFFF;
+      --display:'Space Grotesk',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    ::selection{background:var(--blue);color:#fff}
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit;border:none;background:none;cursor:pointer;text-align:left}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.82);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+    nav.scrolled{border-bottom:1px solid var(--line)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+    .logo{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.02em;color:var(--ink)}
+    .logo-mark{width:34px;height:34px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px}
+    .nav-links{display:flex;gap:34px;font-size:15px;color:var(--ink-2);font-weight:450}
+    .nav-links a{transition:color .2s}
+    .nav-links a:hover{color:var(--blue)}
+    .nav-cta{font-size:14px;font-weight:600;background:var(--blue);color:#fff;padding:11px 20px;border-radius:9px;transition:all .2s}
+    .nav-cta:hover{background:var(--blue-deep)}
+    @media(max-width:860px){.nav-links{display:none}}
+
+    .hero{position:relative;padding:170px 0 110px;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 70% 0%,var(--sky),transparent 60%)}
+    .grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 60% 50% at 60% 20%,#000 20%,transparent 70%);opacity:.7}
+    .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--blue-deep);background:#fff;border:1px solid var(--line-2);border-radius:100px;padding:7px 15px;margin-bottom:28px}
+    .pulse{width:7px;height:7px;border-radius:50%;background:var(--blue-bright);box-shadow:0 0 0 0 rgba(46,134,255,.5);animation:pulse 2s infinite}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(46,134,255,.4)}70%{box-shadow:0 0 0 9px rgba(46,134,255,0)}100%{box-shadow:0 0 0 0 rgba(46,134,255,0)}}
+    h1{font-family:var(--display);font-weight:600;font-size:clamp(40px,5.6vw,68px);line-height:1.02;letter-spacing:-.035em}
+    h1 .accent{color:var(--blue)}
+    .hero-sub{font-size:19px;color:var(--ink-2);max-width:48ch;margin:26px 0 38px}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+    .btn-primary{background:var(--blue);color:#fff;font-weight:600;font-size:15px;padding:15px 28px;border-radius:11px;display:inline-flex;align-items:center;gap:9px;transition:all .2s;box-shadow:0 8px 22px -8px rgba(23,99,214,.5)}
+    .btn-primary:hover{background:var(--blue-deep);transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(23,99,214,.55)}
+    .btn-ghost{border:1px solid var(--line-2);color:var(--ink);font-weight:500;font-size:15px;padding:15px 26px;border-radius:11px;background:#fff;transition:all .2s}
+    .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+
+    .panel{background:var(--blue-ink);border-radius:22px;padding:32px;color:#DCE8FB;position:relative;overflow:hidden;box-shadow:0 30px 60px -25px rgba(10,42,94,.5)}
+    .panel::before{content:"";position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;border:1.5px solid rgba(46,134,255,.3)}
+    .panel::after{content:"";position:absolute;top:-25px;right:-25px;width:130px;height:130px;border-radius:50%;border:1.5px solid rgba(46,134,255,.18)}
+    .p-head{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;color:#7FA5DB;letter-spacing:.05em;margin-bottom:22px}
+    .p-led{width:8px;height:8px;border-radius:50%;background:var(--blue-bright);box-shadow:0 0 0 3px rgba(46,134,255,.25)}
+    .p-big{font-family:var(--display);font-weight:600;font-size:50px;letter-spacing:-.03em;line-height:1;color:#fff}
+    .p-big span{color:var(--blue-bright)}
+    .p-lbl{font-size:14px;color:#7FA5DB;margin-top:6px}
+    .p-rows{margin-top:26px;border-top:1px solid rgba(255,255,255,.1);padding-top:20px;display:flex;flex-direction:column;gap:15px}
+    .p-row{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+    .p-row span{color:#7FA5DB}
+    .p-row b{font-weight:500;font-family:var(--mono);font-size:13px;color:#DCE8FB}
+    .p-bar{height:5px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;margin-top:5px}
+    .p-bar i{display:block;height:100%;background:var(--blue-bright);border-radius:3px}
+    @media(max-width:860px){.hero-inner{grid-template-columns:1fr;gap:44px}}
+
+    .statbar{position:relative;z-index:2;margin-top:80px;border:1px solid var(--line);border-radius:16px;background:var(--card);display:grid;grid-template-columns:repeat(4,1fr);box-shadow:0 14px 40px -22px rgba(11,27,51,.3)}
+    .stat{padding:28px;border-right:1px solid var(--line)}
+    .stat:last-child{border-right:none}
+    .stat-num{font-family:var(--display);font-weight:600;font-size:36px;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+    .stat-num span{color:var(--blue)}
+    .stat-lbl{font-size:13px;color:var(--ink-2);margin-top:8px}
+    @media(max-width:780px){.statbar{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:none}.stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line)}}
+
+    .sec-pad{padding:110px 0}
+    .sec-head{margin-bottom:56px;max-width:60ch}
+    .sec-tag{font-family:var(--mono);font-size:12px;color:var(--blue);letter-spacing:.06em;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+    .sec-tag::before{content:"";width:24px;height:1.5px;background:var(--blue)}
+    h2{font-family:var(--display);font-weight:600;font-size:clamp(30px,4vw,44px);letter-spacing:-.03em;line-height:1.1}
+    .sec-desc{color:var(--ink-2);font-size:17px;margin-top:16px;max-width:56ch}
+
+    .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .svc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 26px;min-height:230px;display:flex;flex-direction:column;transition:all .25s;position:relative}
+    .svc:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 18px 40px -20px rgba(23,99,214,.35)}
+    .svc-ico{width:50px;height:50px;border-radius:13px;background:var(--sky);display:flex;align-items:center;justify-content:center;margin-bottom:auto;font-size:24px;color:var(--blue)}
+    .svc-no{position:absolute;top:30px;right:26px;font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+    .svc h3{font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:-.02em;margin:22px 0 9px}
+    .svc p{font-size:14px;color:var(--ink-2);line-height:1.5}
+    @media(max-width:980px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.svc-grid{grid-template-columns:1fr}}
+
+    .prod-sec{background:var(--bg-2)}
+    .prod-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:50px;align-items:start}
+    .prod-cats{display:flex;flex-direction:column;gap:6px}
+    .pcat{display:flex;align-items:center;gap:15px;padding:18px 20px;border-radius:12px;border:1px solid transparent;background:var(--card);transition:all .2s;width:100%}
+    .pcat:hover{border-color:var(--line-2)}
+    .pcat.active{border-color:var(--blue);background:#fff;box-shadow:0 8px 24px -14px rgba(23,99,214,.4)}
+    .pcat-ico{font-size:22px;color:var(--ink-3);transition:color .2s}
+    .pcat.active .pcat-ico{color:var(--blue)}
+    .pcat-t{font-family:var(--display);font-weight:500;font-size:16px}
+    .pcat-c{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-left:auto}
+    .prod-panel{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:36px;min-height:400px;box-shadow:0 14px 40px -26px rgba(11,27,51,.3)}
+    .pp-head{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+    .pp-icon{font-size:30px;color:var(--blue)}
+    .pp-title{font-family:var(--display);font-weight:600;font-size:26px;letter-spacing:-.02em}
+    .pp-desc{color:var(--ink-2);font-size:15px;margin-bottom:26px}
+    .pp-items{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .pp-item{background:var(--bg-2);border:1px solid var(--line);padding:15px 16px;border-radius:11px;font-size:14px;display:flex;align-items:center;gap:10px;color:var(--ink)}
+    .pp-item i{color:var(--blue);font-size:17px}
+    .pp-tags{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap}
+    .ptag{font-family:var(--mono);font-size:11px;color:var(--ink-2);border:1px solid var(--line-2);padding:6px 12px;border-radius:7px}
+    @media(max-width:880px){.prod-layout{grid-template-columns:1fr;gap:26px}.prod-cats{flex-direction:row;overflow-x:auto;gap:8px}.pcat{min-width:190px}.pcat-c{display:none}}
+    @media(max-width:520px){.pp-items{grid-template-columns:1fr}}
+
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .why-item{display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-size:14.5px;font-weight:450;transition:all .2s}
+    .why-item:hover{border-color:var(--blue);box-shadow:0 12px 28px -20px rgba(23,99,214,.35)}
+    .why-item i{color:var(--blue);font-size:20px;flex-shrink:0}
+    @media(max-width:880px){.why-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:520px){.why-grid{grid-template-columns:1fr}}
+
+    .adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .adv{border:1px solid var(--line);border-radius:15px;padding:28px;background:var(--card);transition:all .25s}
+    .adv:hover{border-color:var(--blue);box-shadow:0 16px 36px -22px rgba(23,99,214,.3)}
+    .adv-n{font-family:var(--mono);font-size:13px;color:var(--blue);margin-bottom:14px}
+    .adv h4{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:-.01em;margin-bottom:8px}
+    .adv p{font-size:14px;color:var(--ink-2);line-height:1.5}
+    @media(max-width:880px){.adv-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:520px){.adv-grid{grid-template-columns:1fr}}
+
+    .ind-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:34px 0;overflow:hidden;background:var(--bg-2)}
+    .ind-track{display:flex;gap:56px;width:max-content;animation:scroll 30s linear infinite}
+    @keyframes scroll{to{transform:translateX(-50%)}}
+    .ind-item{display:flex;align-items:center;gap:13px;font-family:var(--display);font-weight:500;font-size:20px;color:var(--ink-3);white-space:nowrap}
+    .ind-item i{font-size:22px;color:var(--blue)}
+
+    .cta{background:linear-gradient(135deg,var(--blue-deep),var(--blue));border-radius:26px;padding:72px 48px;text-align:center;color:#fff;position:relative;overflow:hidden}
+    .cta .grid-c{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 60% 80% at 50% 50%,#000,transparent 70%)}
+    .cta-inner{position:relative;z-index:2}
+    .cta-tag{justify-content:center;color:#BFD8FF}
+    .cta-tag::before{background:#BFD8FF}
+    .cta h2{color:#fff;margin-bottom:16px}
+    .cta p{font-size:18px;color:rgba(255,255,255,.85);max-width:46ch;margin:0 auto 34px}
+    .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+    .cta .btn-light{background:#fff;color:var(--blue-deep);font-weight:600;font-size:15px;padding:15px 30px;border-radius:11px;transition:transform .2s}
+    .cta .btn-light:hover{transform:translateY(-2px)}
+    .cta .btn-outline{border:1.5px solid rgba(255,255,255,.5);color:#fff;font-weight:600;font-size:15px;padding:15px 28px;border-radius:11px;transition:all .2s}
+    .cta .btn-outline:hover{background:rgba(255,255,255,.14)}
+
+    footer{padding:64px 0 40px;margin-top:110px;border-top:1px solid var(--line)}
+    .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px}
+    .foot-about{font-size:14px;color:var(--ink-2);max-width:32ch;margin-top:16px}
+    .foot-col h5{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.05em;margin-bottom:16px;text-transform:uppercase}
+    .foot-col a{display:block;font-size:14px;color:var(--ink-2);margin-bottom:11px;transition:color .2s}
+    .foot-col a:hover{color:var(--blue)}
+    .foot-bottom{display:flex;justify-content:space-between;padding-top:30px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3)}
+    .foot-bottom .mono{font-family:var(--mono)}
+    @media(max-width:720px){.foot-grid{grid-template-columns:1fr 1fr}.foot-bottom{flex-direction:column;gap:12px}}
+
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+    .reveal.in{opacity:1;transform:none}
+  </style>
+
+</body>
+</html>
