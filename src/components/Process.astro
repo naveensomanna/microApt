@@ -11,12 +11,17 @@ import { process } from "../data/site.js";
     </div>
     <div class="proc-grid reveal">
       {process.map((p, i) => (
-        <div class="proc">
+        <div class="proc" style={`--n:${i}`}>
           <div class="proc-step">{String(i + 1).padStart(2, "0")}</div>
           <div class="proc-ico"><i class={`ti ti-${p.icon}`}></i></div>
           <h4>{p.title}</h4>
           <p>{p.desc}</p>
-          {i < process.length - 1 && <i class="ti ti-chevron-right proc-arrow"></i>}
+          {i < process.length - 1 && (
+            <span class="proc-link" style={`--i:${i}`} aria-hidden="true">
+              <span class="proc-spark"></span>
+              <i class="ti ti-chevron-right proc-arrow"></i>
+            </span>
+          )}
         </div>
       ))}
     </div>
