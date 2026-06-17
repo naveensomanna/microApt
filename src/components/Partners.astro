@@ -27,8 +27,10 @@ const rowB = partners.slice(half);
         <div class="plogo" title={p.name}>
           {p.logo
             ? <img src={p.logo} alt={p.name} loading="lazy" />
-            : <span class="plogo-mark">{p.initials}</span>}
-          <span class="plogo-name">{p.name}</span>
+            : <>
+                <span class="plogo-mark">{p.initials}</span>
+                <span class="plogo-name">{p.name}</span>
+              </>}
         </div>
       ))}
     </div>
@@ -37,14 +39,16 @@ const rowB = partners.slice(half);
         <div class="plogo" title={p.name}>
           {p.logo
             ? <img src={p.logo} alt={p.name} loading="lazy" />
-            : <span class="plogo-mark">{p.initials}</span>}
-          <span class="plogo-name">{p.name}</span>
+            : <>
+                <span class="plogo-mark">{p.initials}</span>
+                <span class="plogo-name">{p.name}</span>
+              </>}
         </div>
       ))}
     </div>
   </div>
 
   <div class="wrap">
-    <p class="partners-note">Proud to support <strong>{partners.length}+</strong> businesses, institutions and startups — and counting.</p>
+    <p class="partners-note">Trusted by <strong>500+</strong> B2B clients — corporates, institutions and startups across India, and counting.</p>
   </div>
 </section>

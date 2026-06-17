@@ -176,8 +176,7 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(28px,4vw,42px);let
 /* each logo tile — swap the monogram for an <img> via the `logo` field */
 .plogo{flex:0 0 auto;min-width:180px;height:96px;border:1px solid var(--line);border-radius:16px;background:var(--card);display:flex;align-items:center;justify-content:center;gap:13px;padding:0 26px;box-shadow:0 10px 30px -22px rgba(11,27,51,.4);transition:transform .25s,border-color .25s,box-shadow .25s}
 .plogo:hover{transform:translateY(-5px);border-color:var(--blue);box-shadow:0 18px 38px -20px rgba(23,99,214,.4)}
-.plogo img{max-height:46px;max-width:150px;object-fit:contain;filter:grayscale(1);opacity:.65;transition:filter .25s,opacity .25s}
-.plogo:hover img{filter:none;opacity:1}
+.plogo img{max-height:48px;max-width:160px;object-fit:contain}
 .plogo-mark{width:46px;height:46px;flex:0 0 auto;border-radius:12px;background:var(--sky);color:var(--blue);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:-.02em;transition:background .25s,color .25s}
 .plogo:hover .plogo-mark{background:var(--blue);color:#fff}
 .plogo-name{font-family:var(--display);font-weight:500;font-size:16px;letter-spacing:-.01em;color:var(--ink-2);white-space:nowrap;transition:color .25s}

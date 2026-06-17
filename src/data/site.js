@@ -103,17 +103,19 @@ export const industryIcons = {
 // in /public (e.g. "/logos/apex.svg"); the tile then renders that image instead
 // of the monogram. `initials` is the fallback shown until a logo is added.
 export const partners = [
-  { name: "Gokaldas Exports",        initials: "GE",   logo: "" },
-  { name: "Cataler",                 initials: "CA",   logo: "" },
-  { name: "Juspay",                  initials: "JU",   logo: "" },
-  { name: "Utthunga Technologies",   initials: "UT",   logo: "" },
-  { name: "Sapthagiri Medical College", initials: "SM", logo: "" },
-  { name: "Rayvector",               initials: "RV",   logo: "" },
+  { name: "Gokaldas Exports",        initials: "GE",   logo: "/logos/gokaldas.svg" },
+  { name: "Cataler",                 initials: "CA",   logo: "/logos/cataler.svg" },
+  { name: "Juspay",                  initials: "JU",   logo: "/logos/juspay.svg" },
+  { name: "Utthunga Technologies",   initials: "UT",   logo: "/logos/utthunga.png" },
+  { name: "Sapthagiri Medical College", initials: "SM", logo: "/logos/sapthagiri.png" },
+  { name: "Rayvector",               initials: "RV",   logo: "/logos/rayvector.svg" },
   { name: "Cream Color Studio",      initials: "CC",   logo: "" },
-  { name: "BIT",                     initials: "BIT",  logo: "" },
-  { name: "VVIT",                    initials: "VVIT", logo: "" },
-  { name: "BITM",                    initials: "BITM", logo: "" },
-  { name: "NPS",                     initials: "NPS",  logo: "" },
+  { name: "BIT",                     initials: "BIT",  logo: "/logos/bit.png" },
+  { name: "VVIT",                    initials: "VVIT", logo: "/logos/vvit.png" },
+  { name: "BITM",                    initials: "BITM", logo: "/logos/bitm.png" },
+  { name: "NPS",                     initials: "NPS",  logo: "/logos/nps.png" },
+  { name: "KisanKraft",              initials: "KK",   logo: "/logos/kisankraft.png" },
+  { name: "Rajya Vokkaligara Sangha", initials: "RVS", logo: "/logos/rvsangha.png" },
 ];
 
 export const stats = [
