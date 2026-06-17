@@ -5,7 +5,7 @@ import { navSections } from "../data/site.js";
 
 <nav id="nav">
   <div class="wrap nav-inner">
-    <a href="/" class="logo"><span class="logo-mark"><i class="ti ti-power"></i></span>MicroApts</a>
+    <a href="/" class="logo"><img class="logo-mark" src="/logo.png" alt="MicroApts logo" width="34" height="34" />MicroApts</a>
     <div class="nav-links">
       {navSections.map((s) => <a href={`#${s.id}`} data-nav={s.id}>{s.label}</a>)}
     </div>

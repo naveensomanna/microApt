@@ -60,7 +60,7 @@ export const lifecycle = [
 // Refurbishment process — builds trust for refurbished buyers
 export const process = [
   { icon: "package-import", title: "Source",        desc: "From trusted corporate fleets." },
-  { icon: "checkup",        title: "Test",          desc: "Full multi-point diagnostics." },
+  { icon: "clipboard-check", title: "Test",         desc: "Full multi-point diagnostics." },
   { icon: "replace",        title: "Replace",       desc: "Faulty parts swapped out." },
   { icon: "device-sd-card", title: "SSD health",    desc: "Performance verified." },
   { icon: "certificate",    title: "Recertify",     desc: "Cleaned, graded, GST-billed." },
@@ -103,16 +103,17 @@ export const industryIcons = {
 // in /public (e.g. "/logos/apex.svg"); the tile then renders that image instead
 // of the monogram. `initials` is the fallback shown until a logo is added.
 export const partners = [
-  { name: "Apex Corp",       initials: "AX", logo: "" },
-  { name: "Vertex Labs",     initials: "VL", logo: "" },
-  { name: "Orbit Systems",   initials: "OS", logo: "" },
-  { name: "Nimbus Cloud",    initials: "NC", logo: "" },
-  { name: "Quanta Works",    initials: "QW", logo: "" },
-  { name: "Stratus IT",      initials: "SI", logo: "" },
-  { name: "Meridian Group",  initials: "MG", logo: "" },
-  { name: "Helix Edu",       initials: "HE", logo: "" },
-  { name: "Summit Mfg",      initials: "SM", logo: "" },
-  { name: "Pioneer Studio",  initials: "PS", logo: "" },
+  { name: "Gokaldas Exports",        initials: "GE",   logo: "" },
+  { name: "Cataler",                 initials: "CA",   logo: "" },
+  { name: "Juspay",                  initials: "JU",   logo: "" },
+  { name: "Utthunga Technologies",   initials: "UT",   logo: "" },
+  { name: "Sapthagiri Medical College", initials: "SM", logo: "" },
+  { name: "Rayvector",               initials: "RV",   logo: "" },
+  { name: "Cream Color Studio",      initials: "CC",   logo: "" },
+  { name: "BIT",                     initials: "BIT",  logo: "" },
+  { name: "VVIT",                    initials: "VVIT", logo: "" },
+  { name: "BITM",                    initials: "BITM", logo: "" },
+  { name: "NPS",                     initials: "NPS",  logo: "" },
 ];
 
 export const stats = [

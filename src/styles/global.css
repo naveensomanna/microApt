@@ -21,7 +21,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 nav.scrolled{border-bottom:1px solid var(--line)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
 .logo{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.02em;color:var(--ink)}
-.logo-mark{width:34px;height:34px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px}
+.logo-mark{width:34px;height:34px;border-radius:50%;object-fit:cover;display:block}
 .nav-links{display:flex;gap:32px;font-size:15px;color:var(--ink-2);font-weight:450}
 .nav-links a{position:relative;transition:color .2s;padding:4px 0}
 .nav-links a:hover{color:var(--blue)}
