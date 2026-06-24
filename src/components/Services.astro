@@ -1,5 +1,7 @@
 ---
 import { coreServices } from "../data/site.js";
+
+const [feature, ...rest] = coreServices;
 ---
 
 <section id="services" class="sec-pad">
@@ -9,8 +11,13 @@ import { coreServices } from "../data/site.js";
       <h2>One partner for the full hardware lifecycle.</h2>
       <p class="sec-desc">From procurement to deployment to ongoing maintenance — we cover every stage so your team can focus on the work, not the infrastructure.</p>
     </div>
-    <div class="svc-grid reveal">
-      {coreServices.map((s) => (
+    <div class="svc-bento reveal">
+      <div class="svc svc-feature">
+        <div class="svc-ico"><i class={`ti ti-${feature.icon}`}></i></div>
+        <h3>{feature.title}</h3>
+        <p>{feature.desc}</p>
+      </div>
+      {rest.map((s) => (
         <div class="svc">
           <div class="svc-ico"><i class={`ti ti-${s.icon}`}></i></div>
           <h3>{s.title}</h3>
