@@ -1,0 +1,69 @@
+---
+import { googleReviews } from "../data/site.js";
+const { rating, count, url, reviews, screenshots, featurableId } = googleReviews;
+const full = Math.floor(rating);
+const half = rating - full >= 0.5;
+---
+
+<section id="reviews" class="sec-pad rev-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">What our customers say</div>
+      <h2>Trusted by corporate customers.</h2>
+      <p class="sec-desc">Real feedback from the corporates, schools, institutions and studios we supply, deploy and support across India.</p>
+    </div>
+
+    {featurableId ? (
+      <!-- Live, free Google reviews via Featurable (no paid API). -->
+      <div class="reveal">
+        <div id={`featurable-${featurableId}`} data-featurable-async></div>
+        <script is:inline src="https://featurable.com/assets/bundle.js" defer></script>
+      </div>
+    ) : (
+    <div class="rev-layout">
+      <!-- Google rating widget -->
+      <a class="g-rating reveal" href={url} target="_blank" rel="noopener" aria-label={`${rating} star Google rating from ${count}+ reviews`}>
+        <div class="g-mark">
+          <span class="g-b">G</span><span class="g-o">o</span><span class="g-y">o</span><span class="g-b">g</span><span class="g-g">l</span><span class="g-r">e</span>
+        </div>
+        <div class="g-score">{rating.toFixed(1)}</div>
+        <div class="g-stars" aria-hidden="true">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <i class={`ti ${i < full ? "ti-star-filled" : (i === full && half ? "ti-star-half-filled" : "ti-star")}`}></i>
+          ))}
+        </div>
+        <div class="g-count">Based on {count}+ Google reviews</div>
+        <span class="g-cta">Read reviews <i class="ti ti-external-link"></i></span>
+      </a>
+
+      <div class="rev-cards reveal">
+        {reviews.map((r) => (
+          <figure class="rev-card">
+            <div class="rev-stars" aria-hidden="true">
+              {Array.from({ length: r.stars }).map(() => <i class="ti ti-star-filled"></i>)}
+            </div>
+            <blockquote>“{r.text}”</blockquote>
+            <figcaption>
+              <span class="rev-av">{(r.company || r.name).charAt(0)}</span>
+              <span>
+                <strong>{r.name}</strong>
+                <em>{r.company}</em>
+              </span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+    )}
+
+    {screenshots && screenshots.length > 0 && (
+      <div class="rev-shots reveal">
+        {screenshots.map((s) => (
+          <a href={url} target="_blank" rel="noopener" class="rev-shot">
+            <img src={s} alt="Google review screenshot" loading="lazy" />
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

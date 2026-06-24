@@ -7,7 +7,7 @@ import { navSections } from "../data/site.js";
   <div class="wrap nav-inner">
     <a href="/" class="logo"><img class="logo-mark" src="/logo.png" alt="MicroApts logo" width="34" height="34" />MicroApts</a>
     <div class="nav-links">
-      {navSections.map((s) => <a href={`#${s.id}`} data-nav={s.id}>{s.label}</a>)}
+      {navSections.map((s) => <a href={s.href} data-nav={s.id}>{s.label}</a>)}
     </div>
     <button class="nav-cta" data-quote>Get a quote</button>
   </div>
@@ -20,6 +20,17 @@ import { navSections } from "../data/site.js";
 
   /* Active-section highlight */
   const navLinks = document.querySelectorAll("[data-nav]");
+
+  /* On a sub-page (e.g. /gallery, /team) highlight that link directly —
+     the scroll-spy below only applies to in-page anchors on the homepage. */
+  const path = (location.pathname.replace(/\/+$/, "") || "/");
+  navLinks.forEach((l) => {
+    const href = l.getAttribute("href") || "";
+    if (!href.includes("#") && href.replace(/\/+$/, "") === path) {
+      l.classList.add("active");
+    }
+  });
+
   const spy = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (e.isIntersecting) {
@@ -29,8 +40,8 @@ import { navSections } from "../data/site.js";
       }
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
-  ["services", "products", "process", "partners", "contact"].forEach((id) => {
-    const el = document.getElementById(id);
+  navLinks.forEach((l) => {
+    const el = document.getElementById((l as HTMLElement).dataset.nav!);
     if (el) spy.observe(el);
   });
 

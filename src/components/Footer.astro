@@ -7,16 +7,16 @@ import { CONTACT } from "../data/site.js";
     <div class="foot-grid">
       <div class="foot-col">
         <a href="/" class="logo"><img class="logo-mark" src="/logo.png" alt="MicroApts logo" width="34" height="34" />MicroApts Technologies</a>
-        <p class="foot-about">Bengaluru-based B2B supplier of enterprise IT hardware — sale, rentals, service and AMC, across India.</p>
+        <p class="foot-about">Bengaluru-based B2B supplier of enterprise IT hardware — sale, rentals, service and enterprise IT solutions, across India.</p>
         <div class="foot-contact">
           <a href={`tel:${CONTACT.phone1.replace(/\s/g, "")}`}><i class="ti ti-phone"></i> {CONTACT.phone1}</a>
           <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener"><i class="ti ti-brand-whatsapp"></i> WhatsApp</a>
-          <span><i class="ti ti-map-pin"></i> {CONTACT.location}</span>
+          <a href={CONTACT.mapUrl} target="_blank" rel="noopener" class="foot-addr"><i class="ti ti-map-pin"></i> <span>{CONTACT.address}</span></a>
         </div>
       </div>
-      <div class="foot-col"><h5>Products</h5><a href="#products">Laptops &amp; desktops</a><a href="#products">Workstations</a><a href="#products">Servers</a><a href="#products">Networking</a></div>
-      <div class="foot-col"><h5>Services</h5><a href="#services">Rentals</a><a href="#services">AMC contracts</a><a href="#services">Repair</a><a href="#process">Refurbished</a></div>
-      <div class="foot-col"><h5>Company</h5><a href="#why">Why us</a><a href="#process">Our process</a><a href="#contact">Contact</a></div>
+      <div class="foot-col"><h5>Products</h5><a href="/#products">Laptops &amp; desktops</a><a href="/#products">Workstations</a><a href="/#products">Servers</a><a href="/#products">Networking</a></div>
+      <div class="foot-col"><h5>Services</h5><a href="/#services">Rentals</a><a href="/#services">Enterprise IT</a><a href="/#services">Repair</a><a href="/#process">Refurbished</a></div>
+      <div class="foot-col"><h5>Company</h5><a href="/#why">Why us</a><a href="/team">Team</a><a href="/gallery">Gallery</a><a href="/#reviews">Reviews</a><a href="/#contact">Contact</a></div>
     </div>
     <div class="foot-bottom">
       <span>© 2026 MicroApts Technologies Pvt Ltd · Private Limited Company</span>

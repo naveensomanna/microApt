@@ -1,0 +1,50 @@
+---
+import { gallery, galleryCategories } from "../data/site.js";
+
+const catLabel = Object.fromEntries(galleryCategories.map((c) => [c.key, c.label]));
+const catIcon = Object.fromEntries(galleryCategories.map((c) => [c.key, c.icon]));
+---
+
+<section id="gallery" class="sec-pad gallery-sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Gallery</div>
+      <h2>Inside MicroApts.</h2>
+      <p class="sec-desc">Our office, repair lab, tested inventory, server deployments, corporate deliveries and the team that makes it happen.</p>
+    </div>
+
+    <div class="gal-filters reveal">
+      <button class="gal-chip active" data-filter="all">All</button>
+      {galleryCategories.map((c) => (
+        <button class="gal-chip" data-filter={c.key}><i class={`ti ti-${c.icon}`}></i>{c.label}</button>
+      ))}
+    </div>
+
+    <div class="gal-grid reveal">
+      {gallery.map((g) => (
+        <figure class="gal-item" data-cat={g.category}>
+          {g.src
+            ? <img src={g.src} alt={g.alt} loading="lazy" />
+            : <div class="gal-ph"><i class={`ti ti-${catIcon[g.category]}`}></i></div>}
+          <figcaption>{catLabel[g.category]}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>(".gal-chip");
+  const items = document.querySelectorAll<HTMLElement>(".gal-item");
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      chips.forEach((c) => c.classList.remove("active"));
+      chip.classList.add("active");
+      const f = chip.dataset.filter;
+      items.forEach((it) => {
+        const show = f === "all" || it.dataset.cat === f;
+        it.style.display = show ? "" : "none";
+      });
+    });
+  });
+</script>

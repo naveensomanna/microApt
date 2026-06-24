@@ -6,17 +6,21 @@ export const CONTACT = {
   phone1: "+91 96205 25510",
   phone2: "+91 90082 44448",
   email: "sales@microaptech.com",
-  location: "Girinagar, Bangalore",
+  location: "Girinagar, Bengaluru",
+  // Full registered address — used in the footer / contact for local SEO.
+  address: "No. 169, 50 Feet Main Road, opp. SBI Bank, 1st Phase, Girinagar, Banashankari 3rd Stage, Bengaluru, Karnataka 560085",
+  // Google Business / Maps profile link.
+  mapUrl: "https://maps.app.goo.gl/MnHakjoY4uQpoFXa6",
   // WhatsApp number in international format, digits only (91 = India + 10-digit number).
   // Currently set to phone1. To use the other number, change to "919008244448".
   whatsapp: "919620525510",
 };
 
 export const coreServices = [
-  { icon: "shopping-cart",  title: "Sale",     desc: "Brand-new systems from Dell, HP, Lenovo and Apple, plus certified-refurbished, professionally tested units." },
-  { icon: "calendar-stats", title: "Rentals",  desc: "Short and long-term rental of laptops, desktops, workstations, MacBooks and servers — with on-time service within TAT." },
-  { icon: "tool",           title: "Service",  desc: "Onsite and remote support, network troubleshooting, plus chip-level motherboard repair across all brands." },
-  { icon: "shield-check",   title: "AMC",      desc: "Comprehensive AMC for desktops, laptops, network switches, routers, printers and all IT products." },
+  { icon: "shopping-cart",      title: "Sale",                   desc: "Brand-new systems from Dell, HP, Lenovo and Apple, plus certified-refurbished, professionally tested units." },
+  { icon: "calendar-stats",     title: "Rentals",                desc: "Short and long-term rental of laptops, desktops, workstations, MacBooks and servers — with on-time service within TAT." },
+  { icon: "tool",               title: "Service",                desc: "Onsite and remote support, network troubleshooting, plus chip-level motherboard repair across all brands." },
+  { icon: "building-skyscraper", title: "Enterprise IT Solutions", desc: "Servers, networking, structured deployments and managed IT support for corporates, schools, institutions and studios." },
 ];
 
 export const productCategories = [
@@ -52,7 +56,7 @@ export const lifecycle = [
   { icon: "calendar-stats", label: "Rental",    tag: "SHORT & LONG TERM" },
   { icon: "rocket",         label: "Deploy",    tag: "SETUP & INSTALL" },
   { icon: "tool",           label: "Service",   tag: "ONSITE & REMOTE" },
-  { icon: "shield-check",   label: "AMC",       tag: "UPTIME ASSURED" },
+  { icon: "building-skyscraper", label: "Enterprise IT", tag: "MANAGED & SLA" },
   { icon: "refresh",        label: "Buyback",   tag: "UPGRADE & RETURN" },
   { icon: "recycle",        label: "Refurbish", tag: "BACK TO STOCK" },
 ];
@@ -79,7 +83,7 @@ export const advantages = [
   { no: "02", title: "Trusted since 2021", desc: "A registered company backed by a team with 15+ years of industry experience." },
   { no: "03", title: "B2B specialists", desc: "Deep focus on corporate, school and college procurement — with setup and installation." },
   { no: "04", title: "Quality assurance", desc: "Structured testing and recertification on every refurbished unit we ship." },
-  { no: "05", title: "Engineer-backed", desc: "Skilled onsite and remote engineering team for service, repair and AMC." },
+  { no: "05", title: "Engineer-backed", desc: "Skilled onsite and remote engineering team for service, repair and managed enterprise IT support." },
   { no: "06", title: "Warranty & replacement", desc: "Warranty-backed solutions with flexible replacement and dependable after-sales support." },
 ];
 
@@ -119,16 +123,120 @@ export const partners = [
 ];
 
 export const stats = [
+  { num: "1L", sym: "+", label: "Devices delivered" },
+  { num: "22", sym: "+", label: "Engineers & support staff" },
+  { num: "Pan", sym: "·IN", label: "Delivery & onsite support" },
   { num: "2021", sym: "", label: "Trading since" },
-  { num: "15", sym: "+", label: "Years of industry experience" },
-  { num: "Pan", sym: "·IN", label: "Supply & onsite support" },
-  { num: "4", sym: "×", label: "Sale · Rent · Service · AMC" },
 ];
 
+// Why-choose highlight band — the headline credibility metrics.
+export const credibility = [
+  { icon: "users",          value: "22+",       label: "IT professionals" },
+  { icon: "device-laptop",  value: "1 Lakh+",   label: "Devices delivered" },
+  { icon: "headset",        value: "Bengaluru", label: "Based support team" },
+  { icon: "truck-delivery", value: "PAN India", label: "Delivery & onsite" },
+  { icon: "receipt-tax",    value: "GST",       label: "Billing on every order" },
+  { icon: "shield-check",   value: "Warranty",  label: "Support on every unit" },
+];
+
+// Team — MicroApts runs a 22-strong team across four departments.
+// Counts sum to 22. Replace `members` with real names/photos when available;
+// set `photo` to an image under /public/team (e.g. "/team/asha.jpg").
+export const team = {
+  total: 22,
+  departments: [
+    { key: "Management", icon: "briefcase", count: 3,
+      desc: "Leadership driving strategy, key accounts and day-to-day operations.",
+      members: [
+        { name: "", role: "Founder & Director", photo: "" },
+        { name: "", role: "Operations Head", photo: "" },
+        { name: "", role: "Accounts & Admin", photo: "" },
+      ] },
+    { key: "Sales Team", icon: "businessplan", count: 7,
+      desc: "Corporate account managers handling sales, rentals and bulk procurement.",
+      members: [
+        { name: "", role: "Sales Manager", photo: "" },
+        { name: "", role: "Key Accounts", photo: "" },
+        { name: "", role: "Field Sales", photo: "" },
+      ] },
+    { key: "Technical Team", icon: "tool", count: 9,
+      desc: "Engineers for onsite & remote service, chip-level repair and deployments.",
+      members: [
+        { name: "", role: "Lead Engineer", photo: "" },
+        { name: "", role: "Chip-level Repair", photo: "" },
+        { name: "", role: "Network Engineer", photo: "" },
+      ] },
+    { key: "Procurement Team", icon: "package", count: 3,
+      desc: "Sourcing, testing and inventory of new and certified-refurbished stock.",
+      members: [
+        { name: "", role: "Procurement Lead", photo: "" },
+        { name: "", role: "QC & Testing", photo: "" },
+        { name: "", role: "Inventory", photo: "" },
+      ] },
+  ],
+};
+
+// Gallery — drop real photos into /public/gallery and set `src` on each item
+// (e.g. "/gallery/office-1.jpg"). Until then a labelled placeholder shows.
+export const galleryCategories = [
+  { key: "office",    label: "Office Photos",         icon: "building" },
+  { key: "lab",       label: "Repair Lab",            icon: "tool" },
+  { key: "inventory", label: "Inventory Stock",       icon: "stack-2" },
+  { key: "server",    label: "Server Setup",          icon: "server" },
+  { key: "delivery",  label: "Corporate Deliveries",  icon: "truck-delivery" },
+  { key: "team",      label: "Team Photos",           icon: "users" },
+];
+
+export const gallery = [
+  { category: "office",    src: "", alt: "MicroApts office" },
+  { category: "office",    src: "", alt: "Reception & workspace" },
+  { category: "lab",       src: "", alt: "Chip-level repair lab" },
+  { category: "lab",       src: "", alt: "Diagnostics bench" },
+  { category: "inventory", src: "", alt: "Laptop & desktop inventory" },
+  { category: "inventory", src: "", alt: "Tested-stock shelves" },
+  { category: "server",    src: "", alt: "Server rack setup" },
+  { category: "server",    src: "", alt: "Networking deployment" },
+  { category: "delivery",  src: "", alt: "Corporate delivery" },
+  { category: "delivery",  src: "", alt: "Bulk dispatch" },
+  { category: "team",      src: "", alt: "MicroApts team" },
+  { category: "team",      src: "", alt: "Service engineers onsite" },
+];
+
+// Customer reviews. Set `googleReviews.url` to your Google Business profile and
+// drop review screenshots into /public/reviews, listing them in `screenshots`.
+// Replace the placeholder `reviews` text with your real Google reviews.
+export const googleReviews = {
+  rating: 5.0,
+  count: 260,
+  url: "https://maps.app.goo.gl/MnHakjoY4uQpoFXa6",
+  // FREE real-reviews widget (no paid Google API). One-time setup:
+  //   1. Go to https://featurable.com, sign up (free), connect this Google
+  //      Business profile, and create a widget.
+  //   2. Copy your widget ID (looks like "Wd8c0xk...") and paste it below.
+  // Once set, the live Featurable widget replaces the placeholder cards.
+  featurableId: "",
+  screenshots: [
+    // "/reviews/review-1.png", "/reviews/review-2.png",
+  ],
+  reviews: [
+    { name: "Prashanth", company: "Local Guide · Google review", stars: 5,
+      text: "I recently got my laptop repaired by Mr. Veresh at MicroApt Technologies in Girinagar, and I am highly satisfied with the service. He diagnosed the genuine issue and resolved it efficiently with absolutely fair charges. No fake problems invented just to charge more, and definitely no hidden fees. A huge relief knowing there's no need to travel all the way to SP Road for IT equipment repairs when we have such a reliable and trustworthy company right nearby. Highly recommended." },
+    { name: "neuralhorizon", company: "Google review", stars: 5,
+      text: "I recently purchased a pair of headphones from MicroApt Technologies and I'm really happy with the quality — they work great and feel well-made. The person who coordinated the order was very polite and professional, with a genuinely good attitude. It's nice to see someone bringing in business the right way — through honesty and good service, not by making false promises. I truly appreciate the experience and hope to receive the same kind of support in the future. Keep up the good work!" },
+    { name: "Suresh Veggalam", company: "Google review", stars: 5,
+      text: "I went for servicing with an outdated, dead-slow DELL laptop — they hardly took a couple of hours and gave excellent service. Now the laptop is brand new in terms of performance, at a very reasonable price. Thanks Vinay / Prasanna." },
+    { name: "Deepu K J", company: "Google review", stars: 5,
+      text: "Thank you Mahesh for such a nice product from MicroApt Technologies — treating customers very well. Nice service from the overall team, positive and quick, making customers very happy. I purchased a used laptop at a reasonable price a year back and its working condition is brilliant. Thank you!" },
+  ],
+};
+
+// `href` is absolute so in-page anchors also work from /gallery and /team.
+// Gallery and Team are their own routes.
 export const navSections = [
-  { id: "services", label: "Services" },
-  { id: "products", label: "Products" },
-  { id: "process", label: "Process" },
-  { id: "partners", label: "Partners" },
-  { id: "contact", label: "Contact" },
+  { id: "services", label: "Services", href: "/#services" },
+  { id: "products", label: "Products", href: "/#products" },
+  { id: "gallery",  label: "Gallery",  href: "/gallery" },
+  { id: "team",     label: "Team",     href: "/team" },
+  { id: "reviews",  label: "Reviews",  href: "/#reviews" },
+  { id: "contact",  label: "Contact",  href: "/#contact" },
 ];

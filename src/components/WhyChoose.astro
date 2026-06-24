@@ -1,14 +1,38 @@
 ---
-import { whyChoose } from "../data/site.js";
+import { whyChoose, credibility } from "../data/site.js";
 ---
 
 <section id="why" class="sec-pad why-sec">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">Why choose MicroApts</div>
-      <h2>Every box ticked, before it ships.</h2>
-      <p class="sec-desc">The assurances corporate buyers actually care about — built into every order, rental and contract.</p>
+  <div class="wrap why-feature reveal">
+    <!-- Lottie centerpiece — swap /lottie/why.json for why-data-analysis.json to change the scene. -->
+    <div class="why-visual">
+      <div class="why-lottie">
+        <lottie-player src="/lottie/why.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      </div>
+      <div class="why-badge"><i class="ti ti-building-skyscraper"></i> Pvt Ltd · Bengaluru</div>
     </div>
+
+    <div class="why-content">
+      <div class="sec-head">
+        <div class="sec-tag">Why choose MicroApts</div>
+        <h2>Corporate-grade credibility, built in.</h2>
+        <p class="sec-desc">A registered Private Limited company with a Bengaluru-based team and a track record corporate buyers can trust.</p>
+      </div>
+      <div class="cred-band">
+        {credibility.map((c) => (
+          <div class="cred">
+            <div class="cred-ico"><i class={`ti ti-${c.icon}`}></i></div>
+            <div>
+              <div class="cred-val">{c.value}</div>
+              <div class="cred-lbl">{c.label}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
     <div class="why-grid reveal">
       {whyChoose.map((item) => (
         <div class="why-item"><i class="ti ti-circle-check"></i><span>{item}</span></div>
@@ -16,3 +40,17 @@ import { whyChoose } from "../data/site.js";
     </div>
   </div>
 </section>
+
+<!-- lottie-player web component (plays .json directly). Loaded once, used here. -->
+<script is:inline src="https://unpkg.com/@lottiefiles/lottie-player@2.0.12/dist/lottie-player.js"></script>
+<script>
+  // Respect reduced-motion: stop the Lottie loop for users who prefer less motion.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    customElements.whenDefined("lottie-player").then(() => {
+      document.querySelectorAll("lottie-player").forEach((p) => {
+        (p as any).setAttribute("autoplay", "");
+        (p as any).stop?.();
+      });
+    });
+  }
+</script>
