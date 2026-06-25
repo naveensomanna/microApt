@@ -1,22 +1,41 @@
 ---
 // Sticky top nav + global scroll behaviours (active-section spy, reveal-on-scroll).
-import { navSections } from "../data/site.js";
+import { navSections, CONTACT } from "../data/site.js";
 ---
 
 <nav id="nav">
   <div class="wrap nav-inner">
     <a href="/" class="logo"><img class="logo-mark" src="/logo.png" alt="MicroApts logo" width="34" height="34" />MicroApts</a>
-    <div class="nav-links">
+    <div class="nav-pill">
       {navSections.map((s) => <a href={s.href} data-nav={s.id}>{s.label}</a>)}
     </div>
-    <button class="nav-cta" data-quote>Get a quote</button>
+    <a class="nav-call" href={`tel:${CONTACT.phone1.replace(/\s/g, "")}`}><i class="ti ti-phone"></i><span>{CONTACT.phone1}</span></a>
   </div>
 </nav>
 
 <script>
-  /* Sticky nav border on scroll */
+  /* Sticky nav border + hide-on-scroll-down / reveal-on-scroll-up.
+     Header stays hidden over the full-screen hero and only appears when the
+     user scrolls back up. */
   const nav = document.getElementById("nav");
-  addEventListener("scroll", () => nav?.classList.toggle("scrolled", scrollY > 20));
+  // Stay transparent while the dark hero is behind the nav; go solid once past it.
+  // Pages without a hero (e.g. /gallery, /team) are always solid.
+  const heroEl = document.querySelector(".hero");
+  let lastY = window.scrollY;
+  const onNavScroll = () => {
+    const y = window.scrollY;
+    const overHero = heroEl ? heroEl.getBoundingClientRect().bottom > 80 : false;
+    nav?.classList.toggle("scrolled", !overHero);
+    // keep the header visible the whole time the hero is pinned; only after the
+    // hero (sticky) is gone does it hide on scroll-down / show on scroll-up.
+    if (overHero || y < 90 || y < lastY) nav?.classList.remove("nav-hidden");
+    else nav?.classList.add("nav-hidden");
+    // never pre-select a section while still over the hero
+    if (overHero) document.querySelectorAll(".nav-pill a.active").forEach((l) => l.classList.remove("active"));
+    lastY = y;
+  };
+  onNavScroll();
+  addEventListener("scroll", onNavScroll, { passive: true });
 
   /* Active-section highlight */
   const navLinks = document.querySelectorAll("[data-nav]");
