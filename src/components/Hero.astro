@@ -15,18 +15,11 @@ import { stats } from "../data/site.js";
 
     <div class="wrap hero-inner">
       <div class="reveal">
-        <div class="eyebrow"><span class="pulse"></span>Sale · Rentals · Service · Enterprise IT</div>
         <h1>We manage IT hardware<br />across its <span class="accent">entire life.</span></h1>
         <p class="hero-sub">From brand-new and certified-refurbished supply, to rental, onsite service, chip-level repair and enterprise IT solutions — MicroApts keeps corporate fleets running across India, on a budget that works.</p>
         <div class="hero-actions">
           <button class="btn-primary" data-quote>Get a quote within hours <i class="ti ti-arrow-right"></i></button>
           <a href="#products" class="btn-ghost">Explore catalog</a>
-        </div>
-        <div class="trust">
-          <span><i class="ti ti-receipt"></i>GST invoice</span>
-          <span><i class="ti ti-shield-check"></i>Warranty on every unit</span>
-          <span><i class="ti ti-cpu"></i>Chip-level repair</span>
-          <span><i class="ti ti-truck-delivery"></i>PAN India delivery</span>
         </div>
       </div>
     </div>
@@ -65,11 +58,12 @@ import { stats } from "../data/site.js";
         ticking = false;
         const track = hero.offsetHeight - window.innerHeight;
         const p = track > 0 ? Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / track)) : 1;
-        // reveal the white card only once scrolling starts, then items one by one
-        statbar.classList.toggle("lit", p >= 0.04);
+        // reveal the white card only once scrolling starts, then items one by one.
+        // Latch on: once shown they stay shown, even if the user scrolls back up.
+        if (p >= 0.04) statbar.classList.add("lit");
         cards.forEach((c, i) => {
           const threshold = 0.06 + i * 0.2;
-          c.classList.toggle("show", p >= threshold);
+          if (p >= threshold) c.classList.add("show");
         });
       };
       addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });

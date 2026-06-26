@@ -17,10 +17,10 @@ export const CONTACT = {
 };
 
 export const coreServices = [
-  { icon: "shopping-cart",      title: "Sale",                   desc: "Brand-new systems from Dell, HP, Lenovo and Apple, plus certified-refurbished, professionally tested units." },
-  { icon: "calendar-stats",     title: "Rentals",                desc: "Short and long-term rental of laptops, desktops, workstations, MacBooks and servers — with on-time service within TAT." },
-  { icon: "tool",               title: "Service",                desc: "Onsite and remote support, network troubleshooting, plus chip-level motherboard repair across all brands." },
-  { icon: "building-skyscraper", title: "Enterprise IT Solutions", desc: "Servers, networking, structured deployments and managed IT support for corporates, schools, institutions and studios." },
+  { img: "/services/sale.webp",       title: "Sale",                   desc: "Brand-new systems from Dell, HP, Lenovo and Apple, plus certified-refurbished, professionally tested units." },
+  { img: "/services/rentals.webp",    title: "Rentals",                desc: "Short and long-term rental of laptops, desktops, workstations, MacBooks and servers — with on-time service within TAT." },
+  { img: "/services/service.webp",    title: "Service",                desc: "Onsite and remote support, network troubleshooting, plus chip-level motherboard repair across all brands." },
+  { img: "/services/enterprise.webp", title: "Enterprise IT Solutions", desc: "Servers, networking, structured deployments and managed IT support for corporates, schools, institutions and studios." },
 ];
 
 export const productCategories = [
