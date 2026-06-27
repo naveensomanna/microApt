@@ -1,0 +1,454 @@
+---
+// Why corporate teams choose us — horizontal scroll-pinned track with imagery.
+//
+// Pin = pure CSS `position: sticky`. A tall outer .track-section gives the scroll
+// distance; the inner .track-sticky pins for 100vh; a single rAF-throttled scroll
+// listener translates .track-rail horizontally as the sticky moves through its
+// parent. No animation libraries.
+//
+// On <=768px or prefers-reduced-motion the pin is dropped entirely and the rail
+// becomes a scroll-snap swipe row (see the fallback media queries + the
+// `enabled()` guard in the script).
+//
+// Images go through Astro's asset pipeline (<Image /> → optimized WebP, intrinsic
+// width/height to avoid layout shift). First card eager + high priority; rest lazy.
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import BackgroundWave from "./BackgroundWave.astro";
+
+import supply from "../assets/advantage/supply.jpg";
+import trusted from "../assets/advantage/trusted.jpg";
+import b2b from "../assets/advantage/b2b.jpg";
+import quality from "../assets/advantage/quality.jpg";
+import engineer from "../assets/advantage/engineer.jpg";
+import warranty from "../assets/advantage/warranty.jpg";
+
+interface Advantage {
+  title: string;
+  body: string;
+  img: ImageMetadata;
+  alt: string;
+  team?: boolean; // true → keep faces natural (less desaturation)
+}
+
+// Single source of truth — edit copy / imagery here.
+const advantages: Advantage[] = [
+  {
+    title: "Pan-India supply",
+    body: "Capability across multiple cities and states with logistics built for scale.",
+    img: supply,
+    alt: "Warehouse stacked with IT hardware ready for nationwide dispatch.",
+  },
+  {
+    title: "Trusted since 2021",
+    body: "A registered company backed by a team with 15+ years of industry experience.",
+    img: trusted,
+    alt: "The MicroApts team together at the office.",
+    team: true,
+  },
+  {
+    title: "B2B specialists",
+    body: "Deep focus on corporate, school and college procurement, with setup and installation.",
+    img: b2b,
+    alt: "Rows of desktops set up and installed for a corporate office.",
+  },
+  {
+    title: "Quality assurance",
+    body: "Structured testing and recertification on every refurbished unit we ship.",
+    img: quality,
+    alt: "Technician testing and recertifying a refurbished laptop on a bench.",
+  },
+  {
+    title: "Engineer-backed",
+    body: "Skilled onsite and remote engineering team for service, repair and managed enterprise IT support.",
+    img: engineer,
+    alt: "Engineer performing chip-level repair on a circuit board.",
+  },
+  {
+    title: "Warranty & replacement",
+    body: "Warranty-backed solutions with flexible replacement and dependable after-sales support.",
+    img: warranty,
+    alt: "Boxed replacement hardware ready for warranty fulfilment.",
+  },
+];
+
+const pad = (n: number) => String(n).padStart(2, "0");
+const total = pad(advantages.length);
+---
+
+<section class="track-section" aria-labelledby="track-title" data-nav-dark>
+  <div class="track-sticky">
+    <BackgroundWave position="center" opacity={0.8} />
+    <header class="track-head">
+      <p class="track-eyebrow">The MicroApts advantage</p>
+      <h2 id="track-title" class="track-headline">Why corporate teams choose us.</h2>
+      <p class="track-progress" aria-hidden="true">
+        <span class="track-progress-now" data-progress-current>01</span>
+        <span class="track-progress-sep">/</span>
+        <span class="track-progress-total">{total}</span>
+      </p>
+    </header>
+
+    <div class="track-viewport">
+      <ul class="track-rail" role="list">
+        {advantages.map((a, i) => (
+          <li class:list={["tcard", { "is-team": a.team }]}>
+            <div class="tcard-media">
+              <Image
+                src={a.img}
+                alt={a.alt}
+                width={880}
+                height={550}
+                format="webp"
+                quality={72}
+                sizes="(max-width: 768px) 80vw, 440px"
+                loading={i === 0 ? "eager" : "lazy"}
+                fetchpriority={i === 0 ? "high" : "auto"}
+                decoding="async"
+              />
+            </div>
+            <div class="tcard-text">
+              <h3 class="tcard-title">{a.title}</h3>
+              <p class="tcard-body">{a.body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .track-section {
+    /* Palette — local to this section, matches the dark hero. */
+    --bg: #0a0d13;
+    --accent: #2e86ff; /* brand blue */
+    --card: #141923;
+    --card-hover: #181f2b;
+    --text: #f4f6fa;
+    --muted: #aab3c0;
+    --line: rgba(255, 255, 255, 0.08);
+
+    position: relative;
+    background: var(--bg);
+    color: var(--text);
+    /* Height is set in JS (100vh + horizontal distance) when the pin is on.
+       Before JS / when disabled it simply collapses to content height. */
+  }
+
+  .track-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: clamp(24px, 4vw, 56px);
+    /* Horizontal gutter on the sticky; vertical centering does the rest, so
+       section- and card-level spacing never fight each other. */
+    padding-inline: clamp(20px, 5vw, 64px);
+  }
+
+  /* Fixed left heading column — stays put while the rail moves. */
+  .track-head {
+    position: relative;
+    z-index: 1; /* above the decorative BackgroundWave */
+    flex: 0 0 clamp(240px, 30vw, 380px);
+  }
+
+  .track-eyebrow {
+    margin: 0 0 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .track-headline {
+    margin: 0 0 22px;
+    font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .track-progress {
+    margin: 0;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    font-variant-numeric: tabular-nums;
+    font-size: 1rem;
+    color: var(--muted);
+  }
+  .track-progress-now {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .track-progress-sep,
+  .track-progress-total {
+    color: var(--muted);
+  }
+
+  /* Window onto the moving rail. */
+  .track-viewport {
+    position: relative;
+    z-index: 1; /* above the decorative BackgroundWave */
+    flex: 1 1 auto;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .track-rail {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 18px;
+    will-change: transform;
+  }
+
+  .tcard {
+    flex: 0 0 clamp(340px, 28vw, 440px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    transition:
+      transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+      border-color 0.25s ease,
+      background-color 0.25s ease;
+  }
+
+  .tcard:hover {
+    transform: translateY(-6px);
+    background: var(--card-hover);
+    border-color: rgba(46, 134, 255, 0.55);
+  }
+
+  .tcard:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* Image panel — fixed 16:10, cover, unified dark/desaturated treatment. */
+  .tcard-media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #0d1119;
+  }
+  .tcard-media :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.72) brightness(0.96);
+    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  /* Team photo: keep faces natural. */
+  .tcard.is-team .tcard-media :global(img) {
+    filter: saturate(0.92) brightness(0.99);
+  }
+  /* Subtle gradient: transparent top → dark bottom, unifies mixed photos. */
+  .tcard-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 13, 19, 0) 38%, rgba(10, 13, 19, 0.62) 100%);
+    pointer-events: none;
+  }
+  .tcard:hover .tcard-media :global(img) {
+    transform: scale(1.05);
+  }
+
+  .tcard-text {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 26px 28px;
+  }
+
+  .tcard-title {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+
+  .tcard-body {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* ---- FALLBACK: no pin on touch/narrow screens or reduced motion. ----
+     Rail becomes a horizontal scroll-snap swipe row; heading stacks above. */
+  @media (max-width: 768px) {
+    .track-section {
+      height: auto !important;
+    }
+    .track-sticky {
+      position: static;
+      height: auto;
+      overflow: visible;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 28px;
+      padding-block: clamp(56px, 12vw, 88px);
+    }
+    .track-head {
+      flex: none;
+    }
+    .track-viewport {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      margin-inline: calc(-1 * clamp(20px, 5vw, 64px));
+      padding-inline: clamp(20px, 5vw, 64px);
+      scroll-padding-inline: clamp(20px, 5vw, 64px);
+    }
+    .track-rail {
+      transform: none !important;
+    }
+    .tcard {
+      flex-basis: min(80%, 360px);
+      scroll-snap-align: start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track-section {
+      height: auto !important;
+    }
+    .track-sticky {
+      position: static;
+      height: auto;
+      overflow: visible;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 28px;
+      padding-block: clamp(56px, 12vw, 88px);
+    }
+    .track-head {
+      flex: none;
+    }
+    .track-viewport {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+    }
+    .track-rail {
+      transform: none !important;
+    }
+    .tcard {
+      flex-basis: min(80%, 360px);
+      scroll-snap-align: start;
+      transition: none;
+    }
+    .tcard-media :global(img),
+    .tcard:hover .tcard-media :global(img) {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // Horizontal scroll-pin driver. Lightweight: one passive scroll listener,
+  // rAF-throttled, plus resize/media re-measure. Cleans up on view transitions.
+  let cleanup: (() => void) | null = null;
+
+  function init() {
+    // Tear down any previous wiring (re-init on astro:page-load, etc.).
+    cleanup?.();
+    cleanup = null;
+
+    const section = document.querySelector<HTMLElement>(".track-section");
+    if (!section) return;
+    const viewport = section.querySelector<HTMLElement>(".track-viewport");
+    const rail = section.querySelector<HTMLElement>(".track-rail");
+    const current = section.querySelector<HTMLElement>("[data-progress-current]");
+    if (!viewport || !rail) return;
+
+    const cardCount = rail.querySelectorAll(".tcard").length;
+    const reduceMQ = matchMedia("(prefers-reduced-motion: reduce)");
+    const narrowMQ = matchMedia("(max-width: 768px)");
+
+    let maxX = 0;
+    let vh = 0;
+    let ticking = false;
+
+    // Pin only when not reduced-motion and not narrow — matches the CSS fallback.
+    const enabled = () => !reduceMQ.matches && !narrowMQ.matches;
+
+    const render = () => {
+      if (!enabled()) return;
+      const distance = section.offsetHeight - vh; // == maxX
+      const progress =
+        distance > 0
+          ? Math.min(1, Math.max(0, -section.getBoundingClientRect().top / distance))
+          : 0;
+      rail.style.transform = `translateX(${-(progress * maxX)}px)`;
+      if (current) {
+        const n = Math.min(cardCount, Math.floor(progress * cardCount) + 1);
+        current.textContent = String(n).padStart(2, "0");
+      }
+    };
+
+    const measure = () => {
+      if (!enabled()) {
+        // Hand control back to the CSS fallback.
+        section.style.height = "";
+        rail.style.transform = "";
+        return;
+      }
+      vh = window.innerHeight;
+      maxX = Math.max(0, rail.scrollWidth - viewport.clientWidth);
+      // Outer height = one viewport + the horizontal distance to travel.
+      section.style.height = `${vh + maxX}px`;
+      render();
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        render();
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", measure);
+    reduceMQ.addEventListener("change", measure);
+    narrowMQ.addEventListener("change", measure);
+    measure();
+
+    cleanup = () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", measure);
+      reduceMQ.removeEventListener("change", measure);
+      narrowMQ.removeEventListener("change", measure);
+      section.style.height = "";
+      rail.style.transform = "";
+    };
+  }
+
+  init();
+  // Astro view transitions (ClientRouter): re-init after swap, tear down before.
+  document.addEventListener("astro:page-load", init);
+  document.addEventListener("astro:before-swap", () => {
+    cleanup?.();
+    cleanup = null;
+  });
+</script>

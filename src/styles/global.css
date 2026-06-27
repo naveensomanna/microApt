@@ -25,21 +25,23 @@ nav.nav-hidden{background:transparent;backdrop-filter:none;border-color:transpar
 nav.nav-hidden .nav-pill{opacity:0;transform:translateX(-50%) translateY(-130%);pointer-events:none}
 nav.nav-hidden .nav-call{opacity:0;transform:translateY(-130%);pointer-events:none}
 nav.nav-hidden .logo{pointer-events:auto}
+nav .wrap{max-width:1440px}
 .nav-inner{position:relative;display:flex;align-items:center;justify-content:space-between;height:74px}
 .logo{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:600;font-size:19px;letter-spacing:-.02em;color:#fff;transition:color .3s}
-nav.scrolled .logo{color:var(--ink)}
-.logo-mark{width:34px;height:34px;border-radius:50%;object-fit:cover;display:block;background:rgba(255,255,255,.9)}
+/* logo/call text follows the section behind the nav: dark over light sections */
+nav.over-light .logo{color:var(--ink)}
+.logo-mark{width:34px;height:34px;border-radius:50%;object-fit:cover;display:block}
 /* centered floating pill of links */
-.nav-pill{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:100px;padding:6px;box-shadow:0 10px 30px -16px rgba(11,27,51,.4);transition:opacity .4s,transform .4s cubic-bezier(.2,.7,.2,1)}
-.nav-pill a{font-size:14.5px;color:var(--ink-2);font-weight:450;padding:9px 17px;border-radius:100px;transition:color .2s,background .2s}
+.nav-pill{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:100px;padding:4px;box-shadow:0 10px 30px -16px rgba(11,27,51,.4);transition:opacity .4s,transform .4s cubic-bezier(.2,.7,.2,1)}
+.nav-pill a{font-size:14.5px;color:var(--ink-2);font-weight:450;padding:7px 16px;border-radius:100px;transition:color .2s,background .2s}
 .nav-pill a:hover{color:var(--blue);background:var(--sky)}
 .nav-pill a.active{color:var(--blue);background:var(--sky);font-weight:500}
 /* right-side call link — useful, not a duplicate of the hero quote button */
 .nav-call{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:500;color:#fff;transition:color .2s,opacity .4s,transform .4s cubic-bezier(.2,.7,.2,1)}
 .nav-call i{font-size:17px}
 .nav-call:hover{color:var(--blue-bright)}
-nav.scrolled .nav-call{color:var(--ink)}
-nav.scrolled .nav-call:hover{color:var(--blue)}
+nav.over-light .nav-call{color:var(--ink)}
+nav.over-light .nav-call:hover{color:var(--blue)}
 @media(max-width:860px){.nav-pill{display:none}.nav-call span{display:none}}
 
 /* HERO — video pinned (sticky) over a scroll track; stat cards reveal one by one, then unpins */

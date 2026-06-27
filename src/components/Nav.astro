@@ -21,11 +21,21 @@ import { navSections, CONTACT } from "../data/site.js";
   // Stay transparent while the dark hero is behind the nav; go solid once past it.
   // Pages without a hero (e.g. /gallery, /team) are always solid.
   const heroEl = document.querySelector(".hero");
+  // Dark-themed sections behind the (transparent) nav — used to flip the logo /
+  // call-link text colour so it stays readable over both light and dark sections.
+  const darkSections = Array.from(document.querySelectorAll<HTMLElement>("[data-nav-dark]"));
+  const NAV_PROBE_Y = 36; // y within the logo, in both top:14 and scrolled top:0 states
   let lastY = window.scrollY;
   const onNavScroll = () => {
     const y = window.scrollY;
     const overHero = heroEl ? heroEl.getBoundingClientRect().bottom > 80 : false;
     nav?.classList.toggle("scrolled", !overHero);
+    // Light text over dark sections, dark text over light ones.
+    const overDark = darkSections.some((s) => {
+      const r = s.getBoundingClientRect();
+      return r.top <= NAV_PROBE_Y && r.bottom > NAV_PROBE_Y;
+    });
+    nav?.classList.toggle("over-light", !overDark);
     // keep the header visible the whole time the hero is pinned; only after the
     // hero (sticky) is gone does it hide on scroll-down / show on scroll-up.
     if (overHero || y < 90 || y < lastY) nav?.classList.remove("nav-hidden");

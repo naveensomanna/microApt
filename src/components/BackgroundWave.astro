@@ -1,0 +1,160 @@
+---
+// Decorative ambient "wave" — a soft glowing ribbon that sweeps across a dark
+// section, behind the content. Pure inline SVG + CSS, no JS per frame, no images.
+//
+// Drop into any `position:relative; overflow:hidden` section; it renders a
+// full-bleed, pointer-events:none layer at a low z-index. Keep your content at
+// `position:relative; z-index:1` so it paints above the wave.
+
+interface Props {
+  /** Vertical placement of the ribbon. */
+  position?: "top" | "center" | "bottom";
+  /** Mirror the curve direction horizontally. */
+  flip?: boolean;
+  /** Overall layer opacity (0–1). */
+  opacity?: number;
+  /** Accent colour — glows in the middle, fades at both ends. */
+  color?: string;
+  /** Render the second, thinner offset curve for a richer ribbon. */
+  dual?: boolean;
+  /** Slow CSS-only drift. Auto-disabled under prefers-reduced-motion. */
+  animate?: boolean;
+}
+
+const {
+  position = "center",
+  flip = false,
+  opacity = 0.6,
+  color = "#2E86FF", // brand blue
+  dual = true,
+  animate = true,
+} = Astro.props;
+
+// Unique IDs so multiple waves on one page never collide.
+const uid = "wave-" + Math.random().toString(36).slice(2, 9);
+const gradId = `${uid}-grad`;
+const glowId = `${uid}-glow`;
+
+const shift =
+  position === "top" ? "-22%" : position === "bottom" ? "22%" : "0%";
+---
+
+<div
+  class:list={["wave", `is-${position}`, { "is-flip": flip, "is-static": !animate }]}
+  style={`--wave-opacity:${opacity}; --wave-shift:${shift};`}
+  aria-hidden="true"
+>
+  <div class="wave-stage">
+    <svg
+      class="wave-svg"
+      viewBox="0 0 1200 600"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <linearGradient id={gradId} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color={color} stop-opacity="0" />
+          <stop offset="50%" stop-color={color} stop-opacity="1" />
+          <stop offset="100%" stop-color={color} stop-opacity="0" />
+        </linearGradient>
+        <filter id={glowId} x="-25%" y="-80%" width="150%" height="260%">
+          <feGaussianBlur stdDeviation="16" />
+        </filter>
+      </defs>
+
+      <!-- Soft ambient glow (thick + blurred). -->
+      <g filter={`url(#${glowId})`} fill="none" stroke={`url(#${gradId})`} stroke-linecap="round">
+        <path
+          d="M -80 520 C 260 380, 520 300, 760 360 C 980 414, 1120 300, 1320 180"
+          stroke-width="9"
+        />
+        {dual && (
+          <path
+            d="M -80 560 C 280 432, 560 352, 800 410 C 1020 464, 1160 356, 1340 250"
+            stroke-width="5"
+          />
+        )}
+      </g>
+
+      <!-- Crisp bright core (thin, unblurred) for definition. -->
+      <g fill="none" stroke={`url(#${gradId})`} stroke-linecap="round">
+        <path
+          class="wave-main"
+          d="M -80 520 C 260 380, 520 300, 760 360 C 980 414, 1120 300, 1320 180"
+          stroke-width="2.4"
+        />
+        {dual && (
+          <path
+            class="wave-second"
+            d="M -80 560 C 280 432, 560 352, 800 410 C 1020 464, 1160 356, 1340 250"
+            stroke-width="1.3"
+          />
+        )}
+      </g>
+    </svg>
+  </div>
+</div>
+
+<style>
+  .wave {
+    position: absolute;
+    inset: 0;
+    z-index: 0; /* behind content (content should be position:relative; z-index:1) */
+    pointer-events: none; /* never block clicks or selection */
+    overflow: hidden; /* never cause horizontal scroll */
+    opacity: var(--wave-opacity, 0.45);
+  }
+
+  /* Shift + flip + slight overscan (so drift never reveals an edge gap). */
+  .wave-stage {
+    position: absolute;
+    inset: 0;
+    transform: translateY(var(--wave-shift, 0%)) scale(1.12);
+    transform-origin: center;
+  }
+  .wave.is-flip .wave-stage {
+    transform: translateY(var(--wave-shift, 0%)) scale(1.12) scaleX(-1);
+  }
+
+  .wave-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    /* GPU-cheap drift; only transform is animated. */
+    animation: wave-drift 32s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    will-change: transform;
+  }
+  .wave.is-static .wave-svg {
+    animation: none;
+  }
+
+  .wave-second {
+    opacity: 0.7;
+  }
+
+  /* Slow, organic flow — gentle horizontal sweep with a touch of vertical bob. */
+  @keyframes wave-drift {
+    0% {
+      transform: translate3d(-2%, -1%, 0);
+    }
+    25% {
+      transform: translate3d(-0.6%, 0.8%, 0);
+    }
+    50% {
+      transform: translate3d(2%, 1.2%, 0);
+    }
+    75% {
+      transform: translate3d(0.6%, -0.4%, 0);
+    }
+    100% {
+      transform: translate3d(-2%, -1%, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wave-svg {
+      animation: none;
+    }
+  }
+</style>
