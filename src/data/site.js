@@ -5,6 +5,7 @@
 export const CONTACT = {
   phone1: "+91 96205 25510",
   phone2: "+91 90082 44448",
+  phone3: "+91 91649 23565",
   email: "sales@microaptech.com",
   location: "Girinagar, Bengaluru",
   // Full registered address — used in the footer / contact for local SEO.
@@ -72,7 +73,7 @@ export const process = [
 
 export const whyChoose = [
   "Warranty on every laptop", "Professionally tested & quality checked",
-  "SSD health & performance verified", "Corporate & bulk order support", "PAN India delivery",
+  "Corporate & bulk order support", "PAN India delivery",
   "Sales & rental solutions", "Onsite & remote support team", "Chip-level repair expertise",
   "Custom configuration (RAM / SSD)", "Buyback & upgrade options", "Engineers with 15+ years' expertise",
 ];
