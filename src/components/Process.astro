@@ -1,29 +1,275 @@
 ---
+// How we refurbish — Awwwards-style sticky split-scroll.
+// Left column pins (title + a big step number that morphs); the right column
+// scrolls editorial rows past it, the centred row highlights and drives the
+// big number. Light theme, oversized type, hairline dividers — deliberately
+// distinct from the dark AdvantageTrack cards.
 import { process } from "../data/site.js";
+
+const pad = (n: number) => String(n).padStart(2, "0");
+const total = pad(process.length);
 ---
 
-<section id="process" class="sec-pad">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-tag">How we refurbish</div>
-      <h2>Every unit earns its place in stock.</h2>
-      <p class="sec-desc">Refurbished doesn't mean uncertain. Each system passes a structured process before it ships — so you get reliability, not surprises.</p>
-    </div>
-    <div class="proc-grid reveal">
+<section id="process" class="rfb" aria-labelledby="rfb-title">
+  <div class="wrap rfb-inner">
+    <aside class="rfb-aside">
+      <p class="rfb-eyebrow">How we refurbish</p>
+      <h2 id="rfb-title" class="rfb-headline">Every unit earns<br />its place in stock.</h2>
+      <p class="rfb-sub">Refurbished doesn't mean uncertain. Each system passes a structured process before it ships — so you get reliability, not surprises.</p>
+      <div class="rfb-meter" aria-hidden="true">
+        <span class="rfb-meter-now" data-bignum>01</span>
+        <span class="rfb-meter-total">/ {total}</span>
+      </div>
+    </aside>
+
+    <ol class="rfb-list" role="list">
       {process.map((p, i) => (
-        <div class="proc" style={`--n:${i}`}>
-          <div class="proc-step">{String(i + 1).padStart(2, "0")}</div>
-          <div class="proc-ico"><i class={`ti ti-${p.icon}`}></i></div>
-          <h4>{p.title}</h4>
-          <p>{p.desc}</p>
-          {i < process.length - 1 && (
-            <span class="proc-link" style={`--i:${i}`} aria-hidden="true">
-              <span class="proc-spark"></span>
-              <i class="ti ti-chevron-right proc-arrow"></i>
-            </span>
-          )}
-        </div>
+        <li class={`rfb-row${i === 0 ? " is-active" : ""}`} data-step={pad(i + 1)} style={`--n:${i}`}>
+          <span class="rfb-row-num">{pad(i + 1)}</span>
+          <div class="rfb-row-main">
+            <h3 class="rfb-row-title"><i class={`ti ti-${p.icon}`}></i>{p.title}</h3>
+            <p class="rfb-row-desc">{p.desc}</p>
+          </div>
+          <span class="rfb-row-bar" aria-hidden="true"></span>
+        </li>
       ))}
-    </div>
+    </ol>
   </div>
 </section>
+
+<style>
+  .rfb {
+    --accent: #1763d6;
+    position: relative;
+    background: var(--bg);
+    padding-block: clamp(72px, 10vw, 128px);
+    border-top: 1px solid var(--line);
+  }
+
+  .rfb-inner {
+    display: grid;
+    grid-template-columns: clamp(280px, 34%, 420px) 1fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+
+  /* ---- Sticky left column ---- */
+  .rfb-aside {
+    position: sticky;
+    top: clamp(96px, 14vh, 160px);
+  }
+  .rfb-eyebrow {
+    margin: 0 0 18px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .rfb-headline {
+    margin: 0 0 20px;
+    font-family: var(--display);
+    font-size: clamp(2rem, 3.6vw, 3.1rem);
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .rfb-sub {
+    margin: 0 0 36px;
+    max-width: 34ch;
+    font-size: 0.98rem;
+    line-height: 1.62;
+    color: var(--ink-2);
+  }
+
+  /* Big morphing step number. */
+  .rfb-meter {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  .rfb-meter-now {
+    font-family: var(--display);
+    font-size: clamp(3.4rem, 6vw, 5.4rem);
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .rfb-meter-now.is-morphing {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  .rfb-meter-total {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--ink-3);
+  }
+
+  /* ---- Right scrolling list ---- */
+  .rfb-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .rfb-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(20px, 3vw, 44px);
+    align-items: start;
+    padding: clamp(28px, 3.4vw, 44px) 0 clamp(28px, 3.4vw, 44px) clamp(18px, 1.8vw, 28px);
+    border-top: 1px solid var(--line);
+    opacity: 0.42;
+    transition: opacity 0.4s ease;
+  }
+  .rfb-row:last-child { border-bottom: 1px solid var(--line); }
+  .rfb-row.is-active { opacity: 1; }
+
+  .rfb-row-num {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink-3);
+    padding-top: 0.5rem;
+    transition: color 0.4s ease;
+  }
+  .rfb-row.is-active .rfb-row-num { color: var(--accent); }
+
+  .rfb-row-title {
+    margin: 0 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .rfb-row-title i {
+    font-size: 0.78em;
+    color: var(--ink-3);
+    transition: color 0.4s ease, transform 0.4s ease;
+  }
+  .rfb-row.is-active .rfb-row-title i {
+    color: var(--accent);
+    transform: translateX(2px);
+  }
+  .rfb-row-desc {
+    margin: 0;
+    max-width: 52ch;
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+
+  /* Active accent bar on the left edge of the row. */
+  .rfb-row-bar {
+    position: absolute;
+    left: 0;
+    top: -1px;
+    width: 2px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .rfb-row.is-active .rfb-row-bar { height: calc(100% + 1px); }
+
+  /* ---- Mobile: drop the pin, simple stacked timeline ---- */
+  @media (max-width: 860px) {
+    .rfb-inner {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .rfb-aside { position: static; top: auto; }
+    .rfb-sub { margin-bottom: 20px; }
+    .rfb-meter { display: none; }
+    .rfb-row { opacity: 1; }
+    .rfb-row-title { font-size: clamp(1.4rem, 6vw, 1.8rem); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rfb-row,
+    .rfb-row-num,
+    .rfb-row-title i,
+    .rfb-row-bar,
+    .rfb-meter-now { transition: none; }
+    .rfb-row { opacity: 1; }
+  }
+</style>
+
+<script>
+  // Scroll-driven active step: the row nearest the viewport's vertical centre
+  // becomes active and drives the big number on the left. rAF-throttled; cleans
+  // up across Astro view transitions.
+  let teardown: (() => void) | null = null;
+
+  function initProcess() {
+    teardown?.();
+    teardown = null;
+
+    const section = document.querySelector<HTMLElement>(".rfb");
+    if (!section) return;
+    const rows = Array.from(section.querySelectorAll<HTMLElement>(".rfb-row"));
+    const bignum = section.querySelector<HTMLElement>("[data-bignum]");
+    if (!rows.length) return;
+
+    if (matchMedia("(max-width: 860px)").matches) {
+      rows.forEach((r) => r.classList.add("is-active"));
+      return;
+    }
+
+    let active = -1;
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const mid = window.innerHeight / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      rows.forEach((row, i) => {
+        const r = row.getBoundingClientRect();
+        const dist = Math.abs(r.top + r.height / 2 - mid);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+      });
+      if (best === active) return;
+      active = best;
+      rows.forEach((row, i) => row.classList.toggle("is-active", i === best));
+      if (bignum) {
+        const next = rows[best].dataset.step ?? "01";
+        if (bignum.textContent !== next) {
+          bignum.classList.add("is-morphing");
+          setTimeout(() => {
+            bignum.textContent = next;
+            bignum.classList.remove("is-morphing");
+          }, 180);
+        }
+      }
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+
+    teardown = () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }
+
+  initProcess();
+  document.addEventListener("astro:page-load", initProcess);
+  document.addEventListener("astro:before-swap", () => { teardown?.(); teardown = null; });
+</script>

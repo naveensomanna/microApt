@@ -71,9 +71,6 @@ const advantages: Advantage[] = [
     alt: "Boxed replacement hardware ready for warranty fulfilment.",
   },
 ];
-
-const pad = (n: number) => String(n).padStart(2, "0");
-const total = pad(advantages.length);
 ---
 
 <section class="track-section" aria-labelledby="track-title" data-nav-dark>
@@ -82,11 +79,6 @@ const total = pad(advantages.length);
     <header class="track-head">
       <p class="track-eyebrow">The MicroApts advantage</p>
       <h2 id="track-title" class="track-headline">Why corporate teams choose us.</h2>
-      <p class="track-progress" aria-hidden="true">
-        <span class="track-progress-now" data-progress-current>01</span>
-        <span class="track-progress-sep">/</span>
-        <span class="track-progress-total">{total}</span>
-      </p>
     </header>
 
     <div class="track-viewport">
@@ -172,25 +164,6 @@ const total = pad(advantages.length);
     line-height: 1.08;
     letter-spacing: -0.02em;
     color: var(--text);
-  }
-
-  .track-progress {
-    margin: 0;
-    display: inline-flex;
-    align-items: baseline;
-    gap: 6px;
-    font-variant-numeric: tabular-nums;
-    font-size: 1rem;
-    color: var(--muted);
-  }
-  .track-progress-now {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--accent);
-  }
-  .track-progress-sep,
-  .track-progress-total {
-    color: var(--muted);
   }
 
   /* Window onto the moving rail. */
@@ -377,10 +350,8 @@ const total = pad(advantages.length);
     if (!section) return;
     const viewport = section.querySelector<HTMLElement>(".track-viewport");
     const rail = section.querySelector<HTMLElement>(".track-rail");
-    const current = section.querySelector<HTMLElement>("[data-progress-current]");
     if (!viewport || !rail) return;
 
-    const cardCount = rail.querySelectorAll(".tcard").length;
     const reduceMQ = matchMedia("(prefers-reduced-motion: reduce)");
     const narrowMQ = matchMedia("(max-width: 768px)");
 
@@ -399,10 +370,6 @@ const total = pad(advantages.length);
           ? Math.min(1, Math.max(0, -section.getBoundingClientRect().top / distance))
           : 0;
       rail.style.transform = `translateX(${-(progress * maxX)}px)`;
-      if (current) {
-        const n = Math.min(cardCount, Math.floor(progress * cardCount) + 1);
-        current.textContent = String(n).padStart(2, "0");
-      }
     };
 
     const measure = () => {
