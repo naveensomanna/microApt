@@ -66,16 +66,15 @@ export const process = [
   { icon: "package-import", title: "Source",        desc: "From trusted corporate fleets." },
   { icon: "clipboard-check", title: "Test",         desc: "Full multi-point diagnostics." },
   { icon: "replace",        title: "Replace",       desc: "Faulty parts swapped out." },
-  { icon: "device-sd-card", title: "SSD health",    desc: "Performance verified." },
   { icon: "certificate",    title: "Recertify",     desc: "Cleaned, graded, GST-billed." },
   { icon: "shield-check",   title: "Warranty",      desc: "Warranty on every unit." },
 ];
 
 export const whyChoose = [
-  "GST invoice on every purchase", "Warranty on every laptop", "Professionally tested & quality checked",
+  "Warranty on every laptop", "Professionally tested & quality checked",
   "SSD health & performance verified", "Corporate & bulk order support", "PAN India delivery",
   "Sales & rental solutions", "Onsite & remote support team", "Chip-level repair expertise",
-  "Custom configuration (RAM / SSD)", "Buyback & upgrade options", "Engineers with 10+ years' expertise",
+  "Custom configuration (RAM / SSD)", "Buyback & upgrade options", "Engineers with 15+ years' expertise",
 ];
 
 export const advantages = [
