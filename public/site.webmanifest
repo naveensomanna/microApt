@@ -1,0 +1,14 @@
+{
+  "name": "MicroApts Technologies",
+  "short_name": "MicroApts",
+  "description": "Enterprise IT hardware — sale, rentals, service and enterprise IT solutions across India.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1763D6",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

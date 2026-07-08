@@ -19,7 +19,7 @@ import { navSections, CONTACT } from "../data/site.js";
      user scrolls back up. */
   const nav = document.getElementById("nav");
   // Stay transparent while the dark hero is behind the nav; go solid once past it.
-  // Pages without a hero (e.g. /gallery, /team) are always solid.
+  // Pages without a hero (e.g. /gallery) are always solid.
   const heroEl = document.querySelector(".hero");
   // Dark-themed sections behind the (transparent) nav — used to flip the logo /
   // call-link text colour so it stays readable over both light and dark sections.
@@ -50,7 +50,7 @@ import { navSections, CONTACT } from "../data/site.js";
   /* Active-section highlight */
   const navLinks = document.querySelectorAll("[data-nav]");
 
-  /* On a sub-page (e.g. /gallery, /team) highlight that link directly —
+  /* On a sub-page (e.g. /gallery) highlight that link directly —
      the scroll-spy below only applies to in-page anchors on the homepage. */
   const path = (location.pathname.replace(/\/+$/, "") || "/");
   navLinks.forEach((l) => {

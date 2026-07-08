@@ -1,32 +1,95 @@
 ---
 // src/layouts/Layout.astro — single source of <head> for the site.
 import "../styles/global.css";
+import { CONTACT } from "../data/site.js";
 
 interface Props {
   title?: string;
   description?: string;
+  /** Path to a page-specific share image under /public; falls back to the default OG card. */
+  image?: string;
 }
 
 const {
   title = "MicroApts Technologies — Enterprise IT Hardware | Sale, Rentals, Service & Enterprise IT Solutions",
   description = "Bengaluru-based B2B supplier of enterprise IT hardware across India — brand-new and certified-refurbished laptops, desktops, workstations and servers, with rentals, chip-level repair, service and enterprise IT solutions.",
+  image = "/og-image.png",
 } = Astro.props;
+
+// Absolute URLs (require `site` in astro.config). Fall back gracefully in dev.
+const site = Astro.site ?? new URL("https://www.microaptech.com");
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL(image, site).href;
+
+// LocalBusiness structured data — the biggest local-SEO win for a B2B supplier.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Store",
+  name: "MicroApts Technologies",
+  url: site.href,
+  logo: new URL("/logo.png", site).href,
+  image: ogImage,
+  description,
+  telephone: [CONTACT.phone1, CONTACT.phone2, CONTACT.phone3],
+  email: CONTACT.email,
+  priceRange: "₹₹",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "No. 169, 50 Feet Main Road, opp. SBI Bank, 1st Phase, Girinagar, Banashankari 3rd Stage",
+    addressLocality: "Bengaluru",
+    addressRegion: "Karnataka",
+    postalCode: "560085",
+    addressCountry: "IN",
+  },
+  areaServed: "IN",
+  sameAs: [CONTACT.mapUrl],
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1763D6" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MicroApts Technologies" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <slot />

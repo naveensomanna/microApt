@@ -64,11 +64,11 @@ export const lifecycle = [
 
 // Refurbishment process — builds trust for refurbished buyers
 export const process = [
-  { icon: "package-import", title: "Source",        desc: "From trusted corporate fleets." },
-  { icon: "clipboard-check", title: "Test",         desc: "Full multi-point diagnostics." },
-  { icon: "replace",        title: "Replace",       desc: "Faulty parts swapped out." },
-  { icon: "certificate",    title: "Recertify",     desc: "Cleaned, graded, GST-billed." },
-  { icon: "shield-check",   title: "Warranty",      desc: "Warranty on every unit." },
+  { icon: "package-import",  title: "Corporate sourcing",       desc: "Lease, rent-return and e-waste devices sourced from verified corporate organizations." },
+  { icon: "clipboard-check", title: "40+ point inspection",     desc: "Hardware, battery, display, ports, keyboard and full stress testing." },
+  { icon: "replace",         title: "Spare parts replacement",  desc: "Faulty parts replaced using compatible, quality components." },
+  { icon: "sparkles",        title: "Professional refurbishment", desc: "Deep cleaned, BIOS/firmware updated, Windows installed and quality checked." },
+  { icon: "shield-check",    title: "Warranty & support",       desc: "Warranty-backed, with after-sales technical support." },
 ];
 
 export const whyChoose = [
@@ -76,15 +76,6 @@ export const whyChoose = [
   "Corporate & bulk order support", "PAN India delivery",
   "Sales & rental solutions", "Onsite & remote support team", "Chip-level repair expertise",
   "Custom configuration (RAM / SSD)", "Buyback & upgrade options", "Engineers with 15+ years' expertise",
-];
-
-export const advantages = [
-  { no: "01", title: "Pan-India supply", desc: "Capability across multiple cities and states with logistics built for scale." },
-  { no: "02", title: "Trusted since 2021", desc: "A registered company backed by a team with 15+ years of industry experience." },
-  { no: "03", title: "B2B specialists", desc: "Deep focus on corporate, school and college procurement — with setup and installation." },
-  { no: "04", title: "Quality assurance", desc: "Structured testing and recertification on every refurbished unit we ship." },
-  { no: "05", title: "Engineer-backed", desc: "Skilled onsite and remote engineering team for service, repair and managed enterprise IT support." },
-  { no: "06", title: "Warranty & replacement", desc: "Warranty-backed solutions with flexible replacement and dependable after-sales support." },
 ];
 
 export const industries = [
@@ -139,67 +130,37 @@ export const credibility = [
   { icon: "shield-check",   value: "Warranty",  label: "Support on every unit" },
 ];
 
-// Team — MicroApts runs a 22-strong team across four departments.
-// Counts sum to 22. Replace `members` with real names/photos when available;
-// set `photo` to an image under /public/team (e.g. "/team/asha.jpg").
-export const team = {
-  total: 22,
-  departments: [
-    { key: "Management", icon: "briefcase", count: 3,
-      desc: "Leadership driving strategy, key accounts and day-to-day operations.",
-      members: [
-        { name: "", role: "Founder & Director", photo: "" },
-        { name: "", role: "Operations Head", photo: "" },
-        { name: "", role: "Accounts & Admin", photo: "" },
-      ] },
-    { key: "Sales Team", icon: "businessplan", count: 7,
-      desc: "Corporate account managers handling sales, rentals and bulk procurement.",
-      members: [
-        { name: "", role: "Sales Manager", photo: "" },
-        { name: "", role: "Key Accounts", photo: "" },
-        { name: "", role: "Field Sales", photo: "" },
-      ] },
-    { key: "Technical Team", icon: "tool", count: 9,
-      desc: "Engineers for onsite & remote service, chip-level repair and deployments.",
-      members: [
-        { name: "", role: "Lead Engineer", photo: "" },
-        { name: "", role: "Chip-level Repair", photo: "" },
-        { name: "", role: "Network Engineer", photo: "" },
-      ] },
-    { key: "Procurement Team", icon: "package", count: 3,
-      desc: "Sourcing, testing and inventory of new and certified-refurbished stock.",
-      members: [
-        { name: "", role: "Procurement Lead", photo: "" },
-        { name: "", role: "QC & Testing", photo: "" },
-        { name: "", role: "Inventory", photo: "" },
-      ] },
-  ],
-};
-
 // Gallery — drop real photos into /public/gallery and set `src` on each item
 // (e.g. "/gallery/office-1.jpg"). Until then a labelled placeholder shows.
 export const galleryCategories = [
   { key: "office",    label: "Office Photos",         icon: "building" },
   { key: "lab",       label: "Repair Lab",            icon: "tool" },
   { key: "inventory", label: "Inventory Stock",       icon: "stack-2" },
-  { key: "server",    label: "Server Setup",          icon: "server" },
   { key: "delivery",  label: "Corporate Deliveries",  icon: "truck-delivery" },
   { key: "team",      label: "Team Photos",           icon: "users" },
 ];
 
 export const gallery = [
-  { category: "office",    src: "", alt: "MicroApts office" },
-  { category: "office",    src: "", alt: "Reception & workspace" },
-  { category: "lab",       src: "", alt: "Chip-level repair lab" },
-  { category: "lab",       src: "", alt: "Diagnostics bench" },
-  { category: "inventory", src: "", alt: "Laptop & desktop inventory" },
-  { category: "inventory", src: "", alt: "Tested-stock shelves" },
-  { category: "server",    src: "", alt: "Server rack setup" },
-  { category: "server",    src: "", alt: "Networking deployment" },
-  { category: "delivery",  src: "", alt: "Corporate delivery" },
-  { category: "delivery",  src: "", alt: "Bulk dispatch" },
-  { category: "team",      src: "", alt: "MicroApts team" },
-  { category: "team",      src: "", alt: "Service engineers onsite" },
+  { category: "office",    src: "/gallery/office-storefront.webp",   alt: "MicroApt Technologies storefront, Girinagar Bengaluru" },
+  { category: "office",    src: "/gallery/office-reception.webp",    alt: "Reception & customer lounge" },
+  { category: "office",    src: "/gallery/office-team-meeting.webp", alt: "Team meeting in the conference room" },
+  { category: "office",    src: "/gallery/office-oba-stage.webp",    alt: "OBA stage — laptop cloning & quality check line" },
+  { category: "office",    src: "/gallery/office-repair-lab.webp",   alt: "L3 repair lab benches" },
+  { category: "lab",       src: "/gallery/lab-l2-repair-room.webp",  alt: "L2 repair room technicians at work" },
+  { category: "lab",       src: "/gallery/lab-rework-station.webp",  alt: "Rework station — chip-level board repair" },
+  { category: "lab",       src: "/gallery/lab-soldering-bench.webp", alt: "Soldering & reflow bench with motherboard" },
+  { category: "inventory", src: "/gallery/inventory-desktop-wall.webp",    alt: "Stacked Dell desktop inventory" },
+  { category: "inventory", src: "/gallery/inventory-tower-stacks.webp",    alt: "Dell tower & workstation stock" },
+  { category: "inventory", src: "/gallery/inventory-laptop-packing.webp",  alt: "Laptops sorted & packed for dispatch" },
+  { category: "inventory", src: "/gallery/inventory-warehouse-boxes.webp", alt: "Warehouse — boxed monitors & servers" },
+  { category: "delivery",  src: "/gallery/delivery-corporate-office.webp",       alt: "Corporate office desktop deployment" },
+  { category: "delivery",  src: "/gallery/delivery-corporate-workstations.webp", alt: "Workstation rollout on client floor" },
+  { category: "delivery",  src: "/gallery/delivery-computer-lab.webp",           alt: "Computer lab setup delivered" },
+  { category: "delivery",  src: "/gallery/delivery-lab-install.webp",            alt: "Institutional computer lab install" },
+  { category: "delivery",  src: "/gallery/delivery-lab-classroom.webp",          alt: "Classroom lab commissioned" },
+  { category: "team",      src: "/gallery/team-lounge.webp",  alt: "MicroApt team get-together" },
+  { category: "team",      src: "/gallery/team-outing.webp",  alt: "Team outing at the retreat" },
+  { category: "team",      src: "/gallery/team-retreat.webp", alt: "Team offsite at Ari Retreat" },
 ];
 
 // Customer reviews. Set `googleReviews.url` to your Google Business profile and
@@ -230,13 +191,12 @@ export const googleReviews = {
   ],
 };
 
-// `href` is absolute so in-page anchors also work from /gallery and /team.
-// Gallery and Team are their own routes.
+// `href` is absolute so in-page anchors also work from the /gallery route.
+// Gallery is its own route.
 export const navSections = [
   { id: "services", label: "Services", href: "/#services" },
   { id: "products", label: "Products", href: "/#products" },
   { id: "gallery",  label: "Gallery",  href: "/gallery" },
-  { id: "team",     label: "Team",     href: "/team" },
   { id: "reviews",  label: "Reviews",  href: "/#reviews" },
   { id: "contact",  label: "Contact",  href: "/#contact" },
 ];

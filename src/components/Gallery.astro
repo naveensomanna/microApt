@@ -10,7 +10,7 @@ const catIcon = Object.fromEntries(galleryCategories.map((c) => [c.key, c.icon])
     <div class="sec-head reveal">
       <div class="sec-tag">Gallery</div>
       <h2>Inside MicroApts.</h2>
-      <p class="sec-desc">Our office, repair lab, tested inventory, server deployments, corporate deliveries and the team that makes it happen.</p>
+      <p class="sec-desc">Our office, repair lab, tested inventory, corporate deliveries and the team that makes it happen.</p>
     </div>
 
     <div class="gal-filters reveal">
@@ -34,6 +34,7 @@ const catIcon = Object.fromEntries(galleryCategories.map((c) => [c.key, c.icon])
 </section>
 
 <script>
+  const grid = document.querySelector<HTMLElement>(".gal-grid");
   const chips = document.querySelectorAll<HTMLButtonElement>(".gal-chip");
   const items = document.querySelectorAll<HTMLElement>(".gal-item");
   chips.forEach((chip) => {
@@ -41,6 +42,8 @@ const catIcon = Object.fromEntries(galleryCategories.map((c) => [c.key, c.icon])
       chips.forEach((c) => c.classList.remove("active"));
       chip.classList.add("active");
       const f = chip.dataset.filter;
+      // Captions repeat the active tab's name, so only show them in "All".
+      grid?.classList.toggle("filtered", f !== "all");
       items.forEach((it) => {
         const show = f === "all" || it.dataset.cat === f;
         it.style.display = show ? "" : "none";
