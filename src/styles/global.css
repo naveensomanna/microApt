@@ -105,9 +105,28 @@ h1 .accent{color:var(--blue)}
 .stat-num{font-family:var(--display);font-weight:600;font-size:34px;letter-spacing:-.03em;line-height:1;color:var(--ink)}
 .stat-num span{color:var(--blue)}
 .stat-lbl{font-size:13px;color:var(--ink-2);margin-top:8px}
-@media(max-width:780px){.statbar{grid-template-columns:repeat(2,1fr)}.statbar .stat:nth-child(2){border-right:none}.statbar .stat:nth-child(1),.statbar .stat:nth-child(2){border-bottom:1px solid var(--line)}}
-/* mobile: no pin/scrub — show the hero normally with all stats visible */
-@media(max-width:768px){.hero{height:auto}.hero-sticky{position:static;height:auto;min-height:100svh}.statbar{opacity:1}.statbar .stat{opacity:1;transform:none}}
+/* Mobile: no pin/scrub. The hero becomes a normal 100svh block laid out as a
+   column — copy on top, stat card in flow beneath it. The card must leave
+   `position:absolute` here: with .hero-sticky static its containing block would
+   fall through to .hero and it would sit on top of the buttons. The 2-column
+   card and the in-flow card share one breakpoint on purpose — a 2x2 card is too
+   tall to be absolutely positioned inside the pinned, overflow-hidden hero. */
+@media(max-width:780px){
+  .hero{height:auto}
+  .hero-sticky{position:static;height:auto;min-height:100svh;display:flex;flex-direction:column}
+  .hero-inner{flex:1;padding-top:132px;padding-bottom:40px}
+  .hero-stats{position:static;padding-bottom:40px}
+  .statbar{grid-template-columns:repeat(2,1fr);opacity:1}
+  .statbar .stat{opacity:1;transform:none}
+  .statbar .stat:nth-child(2){border-right:none}
+  .statbar .stat:nth-child(1),.statbar .stat:nth-child(2){border-bottom:1px solid var(--line)}
+}
+@media(max-width:480px){
+  .hero-inner{padding-top:116px}
+  .statbar .stat{padding:18px 18px}
+  .stat-num{font-size:28px}
+  .stat-lbl{font-size:12px;margin-top:6px}
+}
 
 /* SECTIONS */
 .sec-pad{padding:104px 0}
