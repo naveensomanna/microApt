@@ -1,5 +1,6 @@
 ---
 // src/layouts/Layout.astro — single source of <head> for the site.
+import "../styles/fonts.css";
 import "../styles/global.css";
 import { CONTACT } from "../data/site.js";
 
@@ -84,10 +85,10 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
+    <!-- Fonts are self-hosted (see src/styles/fonts.css). Preload the faces used above the fold. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/space-grotesk-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/tabler-icons-subset.woff2" crossorigin />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
